@@ -1,0 +1,24 @@
+<div class="wrapper">
+   
+    <header class="main-header" [class.shifted]="isSidebarActive">
+        <button id="menu-btn" class="menu-btn" (click)="toggleSidebar()">&#9776;</button>
+        <img src="..//assets/image/logo.png" alt="Logo" class="header-logo">
+        <button class="logout-btn">Logout</button>
+      </header> 
+      
+      <!-- Sidebar -->
+       <aside class="sidebar"  [class.active]="isSidebarActive" id="sidebar">
+        <nav class="nav-links">
+          <a routerLink="userhome">Home</a>
+          <a routerLink="ticket">Raise Ticket</a>
+          <a routerLink="suggestion">Suggestion Forum</a>
+          <!-- <a href="#">Discussion Forum</a> -->
+          <!-- <a href="#">Contact Page</a> -->
+          <a href="#">My Tickets</a>
+        </nav>
+      </aside>  
+  </div>  
+  <div class="content" [class.shifted]="isSidebarActive">
+  <!-- Main Content -->
+    <!-- This is where routed components will appear-->
+  </div>

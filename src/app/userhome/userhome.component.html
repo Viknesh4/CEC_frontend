@@ -1,0 +1,38 @@
+<div class="content">
+  <section class="username-section">
+    <h1 class="greeting-text">Hello, {{ username }}!</h1>
+    
+  </section>
+
+  <!-- Table Section: Show only if there are orders -->
+  <section *ngIf="orders.length > 0" class="table-section">
+    <h2 class="section-title">Order Details</h2>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Order Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.orderItems }}</td>
+          <td>
+            <button
+              class="btn btn-outline-danger"
+              (click)="raiseTicket(order.orderId)">
+              Raise Ticket
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- If there are no orders -->
+  <section *ngIf="orders.length === 0" class="no-orders">
+    <p>No orders found.</p>
+  </section>
+</div>

@@ -1,0 +1,51 @@
+<section class="header-section">
+    <h1>Welcome, Anuja Mithinti!</h1>
+    <h2>Your Feedback Helps Us Improve!</h2>
+  </section>
+  
+  <div class="container">
+    <!-- Emoji Feedback Section -->
+    <div class="emoji-section">
+      <h3>How was your experience?</h3>
+      <div class="emoji-buttons">
+        <button class="emoji-btn" (click)="selectEmoji('angry')">😡</button>
+        <button class="emoji-btn" (click)="selectEmoji('neutral')">😐</button>
+        <button class="emoji-btn" (click)="selectEmoji('happy')">🙂</button>
+        <button class="emoji-btn" (click)="selectEmoji('excited')">😄</button>
+      </div>
+    </div>
+  
+    <!-- Suggestion Form -->
+    <form *ngIf="isSuggestionVisible" (ngSubmit)="submitSuggestion()" #suggestionForm="ngForm" class="suggestion-form">
+      <h3>We'd love to hear from you!</h3>
+  
+      <div class="input-group">
+        <label for="name">Your Name (Optional):</label>
+        <input type="text" id="name" placeholder="Enter your name">
+      </div>
+  
+      <div class="input-group">
+        <label for="email">Your Email (Optional):</label>
+        <input type="email" id="email" placeholder="Enter your email">
+      </div>
+  
+      <div class="input-group">
+        <label for="area">Select Feedback Area:</label>
+        <select id="area" (change)="selectArea($event)">
+          <option value="performance">Performance</option>
+          <option value="design">Design</option>
+          <option value="usability">Usability</option>
+          <option value="features">Features</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label for="suggestion">Your Suggestion:</label>
+        <textarea id="suggestion" rows="5" placeholder="Enter your suggestion here..."></textarea>
+      </div>
+  
+     
+      <button type="submit" class="submit-btn" [disabled]="!suggestionForm.form.valid">Submit</button>
+    </form>
+  </div>
+  

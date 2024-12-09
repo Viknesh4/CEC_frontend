@@ -1,0 +1,45 @@
+<div class="card">
+    <h2 class="card-title">Add Admin</h2>
+    <form [formGroup]="adminForm" (ngSubmit)="createAdmin()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" placeholder="Enter admin's name" />
+        <div *ngIf="adminForm.get('name')?.touched && adminForm.get('name')?.invalid" class="error">
+          Name is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter admin's email" />
+        <div *ngIf="adminForm.get('email')?.touched && adminForm.get('email')?.invalid" class="error">
+          Enter a valid email.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter a password" />
+        <div *ngIf="adminForm.get('password')?.touched && adminForm.get('password')?.invalid" class="error">
+          Password must be at least 6 characters.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div class="ad">
+        <label for="adminType">Admin Type</label>
+        <select formControlName="admin_type">
+          <option value="G">General</option>
+          <option value="L">Transport</option>
+          <option value="T">Technical</option>
+        </select>
+        <div *ngIf="adminForm.get('adminType')?.touched && adminForm.get('adminType')?.invalid" class="error">
+          Admin type is required.
+        </div>
+        </div>
+      </div>
+  
+      <button type="submit" class="submit-btn" >Create Admin</button>
+    </form>
+  </div>
+  

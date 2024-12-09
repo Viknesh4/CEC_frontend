@@ -1,0 +1,96 @@
+/* Optional styles for managing the content's transform */
+body {
+    margin: 0;
+    
+  } 
+  /* app.component.css */
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    font-family: "Rubik", sans-serif;
+    color: #fff;
+    background: linear-gradient(to right, #3b076c, #24c6dc);
+    overflow-x: hidden;
+  }
+  
+  .main-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #240b5d, #3b076c);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .header-logo {
+    /* width: 100; */
+    height: 40px;
+    
+    
+  
+  }
+  
+  .menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .logout-btn {
+    background: #ff3333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 35px;
+  }
+  
+  .logout-btn:hover {
+    background: #cc0000;
+  } 
+  
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to bottom, #ffffff, #1a1a62);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+  }
+  
+  .sidebar.active {
+    transform: translateX(250px);
+  } 
+  .main-header.shifted {
+    transform: translateX(250px); /* Move the header 250px to the right */
+  }
+  
+  .nav-links a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #3b076c;
+    font-weight: bold;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    text-align: center;
+  }
+  
+  .nav-links a:hover {
+    background: #d9d9ff;
+  }
+  

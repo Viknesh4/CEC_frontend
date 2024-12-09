@@ -1,0 +1,23 @@
+<!-- login.component.html -->
+<div class="main-bd">
+  <img src="..//assets/image/blogo.png" alt="logo" class="login_logo"/>
+  <div class="card-body">
+    <h2 text-align="center">User Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password" required />
+      </div>
+
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Sign In</button>
+        <button type="button" class="btn btn-secondary" (click)="navigateToSignUp()">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>

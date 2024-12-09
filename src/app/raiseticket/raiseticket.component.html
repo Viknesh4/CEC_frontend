@@ -1,0 +1,48 @@
+<h1>hlo</h1>
+<div class="ticket-container">
+  <h2>Raise a Ticket </h2>
+
+  <!-- Ticket Form -->
+  <form (ngSubmit)="raiseTicket()" [formGroup]="ticketForm">
+
+    <!-- Category Selection -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category" (change)="onCategoryChange($event)">
+        <option value="" disabled>Select Category</option>
+        <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+      </select>
+      <div *ngIf="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched">
+        <span class="error-message">Category is required.</span>
+      </div>
+    </div>
+
+    <!-- Title (Issues) Selection -->
+    <div class="form-group" *ngIf="issues.length > 0">
+      <label for="title">Issue:</label>
+      <select id="title" formControlName="title" (change)="setPriorityBasedOnIssue($event)">
+        <option value="" disabled>Select Issue</option>
+        <option *ngFor="let issue of issues" [value]="issue.title">{{ issue.title }}</option>
+      </select>
+      <div *ngIf="ticketForm.get('title')?.invalid && ticketForm.get('title')?.touched">
+        <span class="error-message">Issue is required.</span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" placeholder="Describe your issue"></textarea>
+      <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched">
+        <span class="error-message">Description is required.</span>
+      </div>
+    </div>
+
+    <!-- Priority -->
+    
+
+    <button type="submit" class="btn btn-outline-success" [disabled]="ticketForm.invalid">
+      Raise Ticket
+    </button>
+  </form>
+</div>

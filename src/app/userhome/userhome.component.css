@@ -1,0 +1,122 @@
+/* Base layout and padding */
+.content {
+  
+  margin: 0 auto;
+  margin-top: 70px;
+  max-width: 1200px;
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Username and email section */
+.username-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.greeting-text {
+  font-size: 2em;
+  font-weight: 600;
+  color: #0c359c;
+}
+
+.email-text {
+  font-size: 1.1em;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Table section */
+.table-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.order-table th {
+  background-color: 
+  #022c51;
+  color: white;
+  font-size: 1.1em;
+}
+
+.order-table td {
+  background-color: #fff;
+  font-size: 1em;
+  color: #555;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.order-table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.order-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action Button Styling */
+.raise-ticket-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #004b8d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.raise-ticket-btn:hover {
+  background-color: #00396e;
+}
+
+/* Empty State Message */
+.no-orders {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #777;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .greeting-text {
+    font-size: 1.5em;
+  }
+
+  .email-text {
+    font-size: 1em;
+  }
+
+  .order-table th, .order-table td {
+    padding: 12px 15px;
+  }
+
+  .raise-ticket-btn {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+}
