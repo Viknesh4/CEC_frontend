@@ -67,7 +67,7 @@ img{
 }
 
 .content {
-  margin-top: 60px; /* Offset for fixed header */
+  margin-top: 20px; /* Offset for fixed header */
   flex-grow: 1;
   transition: transform 0.3s ease-in-out;
 }

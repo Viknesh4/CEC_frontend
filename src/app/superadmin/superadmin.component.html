@@ -7,15 +7,15 @@
 
     <!-- Dashboard Overview Cards -->
     <div class="row gy-4">
-      <div class="col-lg-4">
+      <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
           <div class="card-body text-center">
             <h6 class="text-uppercase text-muted">Total Queries</h6>
-            <h3 class="display-6 text-primary">{{totalQueries}}</h3>
+            <h3 class="display-6 text-primary">{{ totalQueries }}</h3>
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
           <div class="card-body text-center">
             <h6 class="text-uppercase text-muted">Active Users</h6>
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
           <div class="card-body text-center">
             <h6 class="text-uppercase text-muted">Active Admins</h6>
@@ -31,7 +31,18 @@
           </div>
         </div>
       </div>
+      <div class="col-md-3">
+        <div class="card border-0 shadow-sm rounded-lg">
+          <div class="card-body text-center">
+            <h6 class="text-uppercase text-muted">Suggestions</h6>
+            <h3 class="display-6 text-primary">{{ totalSuggestions }}</h3>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    
+    
 
     <!-- Quick Actions -->
     <div class="mt-5 text-center">
@@ -39,16 +50,21 @@
       <button class="btn btn-outline-primary me-2" (click)="toggleUserTable()">
         View All Users
       </button>
-      <button class="btn btn-outline-success me-2" (click)="toggleAdminTable()">
+      <button class="btn btn-outline-primary me-2" (click)="toggleAdminTable()">
         View All Admins
+      </button>
+      <button class="btn btn-outline-primary me-2" (click)="toggleTicketForm()">
+        View Tickets
+      </button>
+      <button class="btn btn-outline-primary me-2" (click)="toggleSuggestionTable()">
+        View Suggestions
       </button>
       <button class="btn btn-outline-warning me-2" (click)="toggleUserForm()">
         Add New User
       </button>
-      <button class="btn btn-outline-info" (click)="toggleAdminForm()">
+      <button class="btn btn-outline-warning me-2" (click)="toggleAdminForm()">
         Add New Admin
       </button>
-      
       
     </div>
 
@@ -95,37 +111,7 @@
               <td>
 
                 <!--quer table-->
-                <div class="mt-5" *ngIf="showQueryTable">
-                  <h5 class="fw-semibold text-center mb-4">Query Information</h5>
-                  <div class="table-responsive">
-                    <table class="table table-hover table-striped align-middle">
-                      <thead class="table-dark">
-                        <tr>
-                          <th>Query ID</th>
-                          <th>Customer Name</th>
-                          <th>Query Description</th>
-                          <th>Status</th>
-                          <th>Priority</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let query of tickets">
-                          <td>{{ query.ticket_id }}</td>
-                          <td>{{ query.customer_name }}</td>
-                          <td>{{ query.description }}</td>
-                          <td>{{ query.status }}</td>
-                          <td>
-                            {{ 
-                              query.priority === 1 ? 'High' : 
-                              query.priority === 2 ? 'Medium' : 
-                              query.priority === 3 ? 'Low' : 'Unknown' 
-                            }}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                
                 
                 <!-- Show Edit button if not editing this row -->
                 <button
@@ -165,6 +151,8 @@
         </table>
       </div>
     </div>
+
+    <!--Ticket Descp-->
     
 <!-- user info table-->
     <div class="mt-5" *ngIf="showUserTable">
@@ -253,8 +241,69 @@
         </table>
       </div>
     </div>
-    
 
+    <!--ticket details-->
+    <div class="mt-5" *ngIf="showQueryTable">
+      <h5 class="fw-semibold text-center mb-4">Query Information</h5>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Query ID</th>
+              <th>Customer Name</th>
+              <th>Query Description</th>
+              <th>Status</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let query of tickets">
+              <td>{{ query.ticket_id }}</td>
+              <td>{{ query.customer_id }}</td>
+              <td>{{ query.description }}</td>
+              <td>{{ query.status }}</td>
+              <td>
+                {{ 
+                  query.priority === 1 ? 'High' : 
+                  query.priority === 2 ? 'Medium' : 
+                  query.priority === 3 ? 'Low' : 'Unknown' 
+                }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    
+<!--Suggestion table-->
+
+<div class="mt-5" *ngIf="showSuggestionTable">
+  <h5 class="fw-semibold text-center mb-4">Query Information</h5>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Suggestion ID</th>
+          <th>Customer ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let query of Suggestions;let i = index ">
+          <td>{{ query.suggestion_id }}</td>
+          <td>{{ query.user_id }}</td>
+          <td>{{ query.title }}</td>
+          <td>{{ query.description }}</td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
     <!-- Add New User Table -->
     <div class="mt-5" *ngIf="showUserAdd">
       <h5 class="fw-semibold text-center mb-4">Add New User</h5>

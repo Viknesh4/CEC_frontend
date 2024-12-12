@@ -1,48 +1,47 @@
-<h1>hlo</h1>
-<div class="ticket-container">
-  <h2>Raise a Ticket </h2>
+<div class="ticket-container bg-white shadow rounded p-4 mx-auto">
+  <h2 class="text-center text-muted border-bottom pb-2 mb-4">Raise a Ticket</h2> <!-- Changed text-muted for grey -->
 
   <!-- Ticket Form -->
   <form (ngSubmit)="raiseTicket()" [formGroup]="ticketForm">
 
     <!-- Category Selection -->
-    <div class="form-group">
-      <label for="category">Category:</label>
-      <select id="category" formControlName="category" (change)="onCategoryChange($event)">
-        <option value="" disabled>Select Category</option>
+    <div class="mb-3">
+      <label for="category" class="form-label fw-bold">Category:</label>
+      <select id="category" class="form-select" formControlName="category" (change)="onCategoryChange($event)">
+        <option value="" disabled selected>Select Category</option>
         <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
       </select>
-      <div *ngIf="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched">
-        <span class="error-message">Category is required.</span>
+      <div *ngIf="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched" class="text-danger small mt-1">
+        Category is required.
       </div>
     </div>
 
     <!-- Title (Issues) Selection -->
-    <div class="form-group" *ngIf="issues.length > 0">
-      <label for="title">Issue:</label>
-      <select id="title" formControlName="title" (change)="setPriorityBasedOnIssue($event)">
-        <option value="" disabled>Select Issue</option>
+    <div class="mb-3" *ngIf="issues.length > 0">
+      <label for="title" class="form-label fw-bold">Issue:</label>
+      <select id="title" class="form-select" formControlName="title" (change)="setPriorityBasedOnIssue($event)">
+        <option value="" disabled selected>Select Issue</option>
         <option *ngFor="let issue of issues" [value]="issue.title">{{ issue.title }}</option>
       </select>
-      <div *ngIf="ticketForm.get('title')?.invalid && ticketForm.get('title')?.touched">
-        <span class="error-message">Issue is required.</span>
+      <div *ngIf="ticketForm.get('title')?.invalid && ticketForm.get('title')?.touched" class="text-danger small mt-1">
+        Issue is required.
       </div>
     </div>
 
     <!-- Description -->
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea id="description" formControlName="description" placeholder="Describe your issue"></textarea>
-      <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched">
-        <span class="error-message">Description is required.</span>
+    <div class="mb-3">
+      <label for="description" class="form-label fw-bold">Description:</label>
+      <textarea id="description" class="form-control" formControlName="description" rows="4" placeholder="Describe your issue"></textarea>
+      <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched" class="text-danger small mt-1">
+        Description is required.
       </div>
     </div>
 
-    <!-- Priority -->
-    
-
-    <button type="submit" class="btn btn-outline-success" [disabled]="ticketForm.invalid">
-      Raise Ticket
-    </button>
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-outline-secondary px-5" [disabled]="ticketForm.invalid">
+        <i class="bi bi-send"></i> Raise Ticket
+      </button>
+    </div>
   </form>
 </div>

@@ -1,63 +1,44 @@
 .ticket-container {
-  
   max-width: 600px;
-  margin: 40px auto;
-  margin-top: 90px;
-  padding: 20px;
+  margin: 0 auto;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 .ticket-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #4CAF50;
+  color: #6c757d; /* Grey color matching the navbar */
   font-weight: bold;
-  border-bottom: 2px solid #4CAF50;
+  border-bottom: 3px solid #6c757d; /* Matching grey for consistency */
+  padding-bottom: 8px;
   display: inline-block;
-  padding-bottom: 5px;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
+.form-label {
   font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+  color: #3b076c;
 }
 
-select, textarea, input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+.form-select:focus, .form-control:focus {
+  border-color: #6c757d;
+  box-shadow: 0 0 5px rgba(108, 117, 125, 0.5); /* Grey matching the theme */
 }
 
-select:focus, textarea:focus, input:focus {
-  border-color: #4CAF50;
-  outline: none;
-  box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
-}
-
-.error-message {
-  color: #e74c3c;
+.text-danger {
   font-size: 0.9rem;
 }
 
 button {
-  width: 50%;
-  padding: 10px;
   font-size: 1rem;
-  margin-left: 140px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  color: #fff;
+  background-color: #6c757d; /* Grey background for button */
+  border: 1px solid #6c757d;
 }
 
-
+button:hover {
+  background-color: #1e2124; /* Darker shade for hover */
+  border-color: #5a6268;
+}

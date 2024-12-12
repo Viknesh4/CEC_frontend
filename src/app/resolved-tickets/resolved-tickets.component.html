@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Resolved Tickets</h2>
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>User ID</th>
+          <th>Resolved Date</th>
+          <th>Query Description</th>
+          <th>Solved Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of rtickets">
+          <td>{{ ticket.ticket_id }}</td>
+          <td>{{ ticket.customer_id }}</td>
+          <td>{{ ticket.updated_at}}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ ticket.message}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

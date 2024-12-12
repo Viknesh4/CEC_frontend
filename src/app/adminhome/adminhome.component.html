@@ -1,0 +1,47 @@
+<div class="container">
+    <!-- Tickets Table -->
+    <h2 style="text-align: center;">{{ adminType }}</h2>
+    <table class="tickets-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>User ID</th>
+          <th>Date</th>
+          <th>Issue</th>
+          <th>priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets" (click)="openPopup(ticket)">
+          <td>{{ ticket.ticket_id }}</td>
+          <td>{{ ticket.customer_id }}</td>
+          <td>{{ ticket.updated_at | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ ticket.description}}</td>
+          <td>{{ ticket.priority }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Popup for Ticket Details -->
+    <div class="popup" *ngIf="selectedTicket">
+      <div class="popup-content">
+        <div class="header">
+          <h3>Ticket ID: {{ selectedTicket.ticket_id }}</h3>
+          <button class="close-btn" (click)="closePopup()">X</button>
+        </div>
+        <div class="description">
+          <h4>Customer Issue:</h4>
+          <p>{{ selectedTicket.description }}</p>
+        </div>
+        <div class="admin-input">
+          <h4>Admin Progress:</h4>
+          <textarea [(ngModel)]="adminResponse" placeholder="Enter progress update..."></textarea>
+        </div>
+        <div class="actions">
+          <button (click)="onResolve()">Resolve</button>
+          <button (click)="onProgress()">Progress</button>
+          <button (click)="onForward()">Forward</button>
+        </div>
+      </div>
+    </div>
+  </div>

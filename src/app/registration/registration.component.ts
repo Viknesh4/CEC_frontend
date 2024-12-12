@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { CommonModule} from '@angular/common'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration',
   standalone: true,
@@ -11,6 +12,7 @@ import { CommonModule} from '@angular/common';
 })
 export class RegistrationComponent {
   http = inject(HttpClient);
+  router = inject(Router);
   private passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -33,6 +35,7 @@ export class RegistrationComponent {
           next: (response) => {
             console.log('Registration successful:', response);
             alert('You have been registered successfully!');
+            this.router.navigate(['login']);
             this.registrationForm.reset(); // Reset the form after submission
           },
           error: (err) => {

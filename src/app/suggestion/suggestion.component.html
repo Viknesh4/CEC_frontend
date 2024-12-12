@@ -1,51 +1,59 @@
-<section class="header-section">
-    <h1>Welcome, Anuja Mithinti!</h1>
-    <h2>Your Feedback Helps Us Improve!</h2>
-  </section>
-  
-  <div class="container">
-    <!-- Emoji Feedback Section -->
-    <div class="emoji-section">
-      <h3>How was your experience?</h3>
-      <div class="emoji-buttons">
-        <button class="emoji-btn" (click)="selectEmoji('angry')">😡</button>
-        <button class="emoji-btn" (click)="selectEmoji('neutral')">😐</button>
-        <button class="emoji-btn" (click)="selectEmoji('happy')">🙂</button>
-        <button class="emoji-btn" (click)="selectEmoji('excited')">😄</button>
+<div class="suggestion-container bg-white shadow rounded p-4 mx-auto">
+  <div class="d-flex justify-content-center">
+    <h5 class="text-center text-muted border-bottom pb-3 mb-4">Suggestion Forum</h5>
+  </div><!-- Sleek header -->
+
+  <!-- Suggestion Form -->
+  <form (ngSubmit)="submitSuggestion()" [formGroup]="suggestionForm" class="form-container">
+    <!-- Title -->
+    <div class="form-group mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="form-control"
+        placeholder="Enter a title for your suggestion"
+      />
+      <div *ngIf="suggestionForm.get('title')?.invalid && suggestionForm.get('title')?.touched" class="text-danger">
+        Title is required.
       </div>
     </div>
-  
-    <!-- Suggestion Form -->
-    <form *ngIf="isSuggestionVisible" (ngSubmit)="submitSuggestion()" #suggestionForm="ngForm" class="suggestion-form">
-      <h3>We'd love to hear from you!</h3>
-  
-      <div class="input-group">
-        <label for="name">Your Name (Optional):</label>
-        <input type="text" id="name" placeholder="Enter your name">
+
+    <!-- Description -->
+    <div class="form-group mb-4">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        rows="5"
+        placeholder="Describe your suggestion in detail"
+      ></textarea>
+      <div *ngIf="suggestionForm.get('description')?.invalid && suggestionForm.get('description')?.touched" class="text-danger">
+        Description is required.
       </div>
-  
-      <div class="input-group">
-        <label for="email">Your Email (Optional):</label>
-        <input type="email" id="email" placeholder="Enter your email">
-      </div>
-  
-      <div class="input-group">
-        <label for="area">Select Feedback Area:</label>
-        <select id="area" (change)="selectArea($event)">
-          <option value="performance">Performance</option>
-          <option value="design">Design</option>
-          <option value="usability">Usability</option>
-          <option value="features">Features</option>
-        </select>
-      </div>
-  
-      <div class="input-group">
-        <label for="suggestion">Your Suggestion:</label>
-        <textarea id="suggestion" rows="5" placeholder="Enter your suggestion here..."></textarea>
-      </div>
-  
-     
-      <button type="submit" class="submit-btn" [disabled]="!suggestionForm.form.valid">Submit</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-outline-secondary px-5" [disabled]="suggestionForm.invalid">
+        Submit Suggestion
+      </button>
+    </div>
+  </form>
+
+  <!-- Suggestions List -->
+  <!-- <div class="suggestions-list mt-5">
+    <h6 class="text-muted mb-3">Recent Suggestions</h6>
+    <ul class="list-group">
+      <li *ngFor="let suggestion of suggestions" class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          <strong>{{ suggestion.title }}</strong>
+          <p class="mb-0 text-muted">{{ suggestion.description }}</p>
+        </span>
+        <span class="badge bg-secondary">{{ suggestion.date | date }}</span>
+      </li>
+    </ul>
+  </div> -->
+</div>

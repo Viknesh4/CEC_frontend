@@ -18,13 +18,16 @@ export class superadminComponent {
   showAdminAdd: boolean = false;
   showUserAdd: boolean = false;
   showQueryTable: boolean = false;
+  showSuggestionTable: boolean = false;
   toggleNav() {
     this.showNav = !this.showNav;
   }
-
+//Constructor
   constructor() {
     this.fetchAdminData();
     this.fetchUsersData();
+    this.fetchTicketsData();
+    this.fetchSuggestionData();
   }
   
   http = inject(HttpClient);
@@ -34,10 +37,13 @@ export class superadminComponent {
   totalAdmins : number = 0;
   totalUsers : number = 0;
   totalQueries : number = 0;
+  Suggestions: any[] = [];
+  totalSuggestions: number = 0;
 
   private apiUrl = 'https://localhost:7297/api/Admin';
   private apiUrlU = 'https://localhost:7297/api/User'
-  private apiUrlT = 'https://localhost:7297/api/Ticket'
+  private apiUrlT = 'https://localhost:7297/api/Ticket/GetAlltickets'
+  private apiUrlS = 'https://localhost:7297/api/Suggestion'
   // Fetch admin data from the API
   fetchAdminData(): void {
     this.http.get<any[]>(this.apiUrl).subscribe({
@@ -66,12 +72,39 @@ export class superadminComponent {
       }
   });
   }
+
+  fetchSuggestionData(): void {
+    this.http.get<any[]>(this.apiUrlS).subscribe({
+      next: (data) => {
+        this.Suggestions = data;
+        this.totalSuggestions = data.length;
+      }
+  });
+  }
   // Call fetchAdminData when the component is initialized
 
-  deleteAdmin( adminid:any):void {}
+  deleteAdmin(adminid: number) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.http.delete(`${this.apiUrl}/${adminid}`).subscribe({
+        next: () => {
+          alert('Admin deleted successfully');
+          this.fetchAdminData(); // Refresh data
+        },
+        error: (err) => {
+          console.error('Error deleting Admin:', err);
+          alert(err.error?.message || 'Error deleting Admin');
+        },
+      });
+    }
+
+  }
 
   toggleAdminTable(): void {
     this.showAdminTable = !this.showAdminTable;
+  }
+
+  toggleSuggestionTable(): void {
+    this.showSuggestionTable = !this.showSuggestionTable;
   }
 
   toggleUserTable(): void {

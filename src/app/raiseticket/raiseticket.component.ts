@@ -4,6 +4,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProvider';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-raise-ticket',
@@ -13,7 +14,7 @@ import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProv
 })
 export class RaiseticketComponent implements OnInit{
   http = inject(HttpClient)
-
+  router = inject(Router);
   customerId: number = 0;
   orderId: number = 0;
   userService = inject(UserService);
@@ -26,6 +27,7 @@ export class RaiseticketComponent implements OnInit{
       priority: new FormControl(''),
       assigned_admin_id: new FormControl(0),
       ticket_id:new FormControl(0),
+      admin_type:new FormControl(''),
     });
 
 
@@ -33,7 +35,7 @@ export class RaiseticketComponent implements OnInit{
   categories = [
     {
       name: 'General',
-      adminId: 3,
+      admintype: "G",
       issues: [
         { title: 'General Query', priority: 3 },
         { title: 'Feedback', priority: 4 },
@@ -42,7 +44,7 @@ export class RaiseticketComponent implements OnInit{
     },
     {
       name: 'Logistics',
-      adminId: 4,
+      admintype: "L",
       issues: [
         { title: 'Delayed Delivery', priority: 1 },
         { title: 'Lost Package', priority: 1 },
@@ -51,7 +53,7 @@ export class RaiseticketComponent implements OnInit{
     },
     {
       name: 'Technical',
-      adminId: 5,
+      admintype: "T",
       issues: [
         { title: 'Website Issue', priority: 2 },
         { title: 'Payment Failure', priority: 1 },
@@ -68,7 +70,7 @@ export class RaiseticketComponent implements OnInit{
     const categoryData = this.categories.find(cat => cat.name === selectedCategory);
     if (categoryData) {
       this.issues = categoryData.issues;
-      this.ticketForm.get('assigned_admin_id')?.setValue(categoryData.adminId);
+      this.ticketForm.get('admin_type')?.setValue(categoryData.admintype);
     }
   }
 
@@ -88,6 +90,8 @@ export class RaiseticketComponent implements OnInit{
     this.customerId = user.cus_id;
     this.orderId = this.userService.getSelectedOrderId();
   }
+
+  
   // Submit the ticket
   raiseTicket(): void {
     if (this.ticketForm.valid) {
@@ -103,7 +107,8 @@ export class RaiseticketComponent implements OnInit{
         next: (response) => {
           console.log('Ticket raised successfully:', response);
           alert('Ticket raised successfully!');
-          this.ticketForm.reset(); // Reset the form after successful submission
+          this.ticketForm.reset();
+          this.router.navigate(['mytickets']);
           this.issues = []; // Clear the issues array
         },
         error: (error) => {

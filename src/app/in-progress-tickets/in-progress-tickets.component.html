@@ -1,0 +1,37 @@
+<div class="table-container">
+    <h2>In Progress Tickets</h2>
+    <table class="tickets-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Query Description</th>
+          <th>Recent update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of ptickets" (click)="openPopup(ticket)">
+          <td>{{ ticket.ticket_id}}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ ticket.message }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Popup Box for Editing Ticket -->
+  <div class="popup" *ngIf="selectedTicket">
+    <div class="popup-content">
+      <h2>Ticket ID: {{ selectedTicket.ticket_id }}</h2>
+      <label for="description"><strong><u>Admin Progress:</u></strong></label>
+      <br>
+      <br>
+      <label><strong>Recent Progress: </strong></label>
+      <p>{{selectedTicket.message}}<p>
+      <textarea id="description" [(ngModel)]="adminResponse"></textarea>
+      <div class="popup-actions">
+        <button (click)="resolveTicket()">Resolve</button>
+        <button (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+  
