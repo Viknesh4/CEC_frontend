@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild, AfterViewInit,Input,Output,EventEmitter } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, ElementRef, ViewChild, AfterViewInit,Input,Output,EventEmitter, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,17 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent  {
-
+  userService = inject(UserService)
+  router = inject(Router)
   imagePath="cecLogo.png"
   isSidebarActive = false;
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
+  }
+
+  logout(): void {
+    this.userService.clearUser(); // Clear session storage
+    this.router.navigate(['/login']); // Redirect to the login page
   }
 }

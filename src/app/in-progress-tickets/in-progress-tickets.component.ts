@@ -14,6 +14,8 @@ import { UserService } from '../user.service';
 export class InProgressTicketsComponent {
   ptickets: any[] =[];
   adminResponse = '';
+  emailcontent = {to:'sivavicky223@gmail.com',subject:'',body:''};
+  apiUrlE: string  = "https://localhost:7297/api/Email/send";
   // Selected ticket for editing
   selectedTicket: any = null;
   adminid = 0;
@@ -36,7 +38,6 @@ export class InProgressTicketsComponent {
       }
     );
   }
-
   
   
   updateTicket(ticket_id: number, status?: string, message?: string) {
@@ -45,13 +46,14 @@ export class InProgressTicketsComponent {
   
     // Create the update payload, only including non-null values
     const updateRequest: any = {};
-    if (status) updateRequest.status = status;
-    if (message) updateRequest.message = message;
+    if (status) {updateRequest.status = status;this.emailcontent.subject=status};
+    if (message) {updateRequest.message = message;this.emailcontent.body=message};
   
     // HTTP PUT request to update the ticket
     this.http.put(apiUrl, updateRequest, { responseType: 'text' }).subscribe(
       (response) => {
         alert('Ticket updated successfully!');
+        this.sendEmail(this.emailcontent);
         this.closePopup(); // Close the popup after successful update
         this.ProgressTickets(); // Refresh the tickets list
       },
@@ -77,5 +79,16 @@ export class InProgressTicketsComponent {
     if (this.selectedTicket) {
       this.updateTicket(this.selectedTicket.ticket_id, 'resolved', this.adminResponse);
     }
+  }
+
+  sendEmail(email: { to: string; subject: string; body: string }): void {
+    this.http.post(this.apiUrlE, email).subscribe(
+      (response) => {
+        console.log('Email sent successfully:', response);
+      },
+      (error) => {
+        console.error('Error sending email:', error);
+      }
+    );
   }
 }

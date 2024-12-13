@@ -1,55 +1,64 @@
-
-
-// user.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  adminid: number= 0;
-  private username: string = " ";
-  private email: string = " ";
-  private cus_id: number = 0;
-  private selectedOrderId: number = 0;
-  private admin_type: string = " ";
-  setUser(username: string, email: string,cus_id: number): void {
-    this.username = username;
-    this.email = email;
-    this.cus_id = cus_id; 
-  }
-  setAdminId(adminid: number) : void {
-    this.adminid = adminid;
+  private readonly USER_KEY = 'user';
+  private readonly ADMIN_ID_KEY = 'adminid';
+  private readonly SELECTED_ORDER_ID_KEY = 'selectedOrderId';
+  private readonly ADMIN_TYPE_KEY = 'admin_type';
+
+  // Set user details in session storage
+  setUser(username: string, email: string, cus_id: number): void {
+    const user = { username, email, cus_id };
+    sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
-  getAdminId(): number {
-    return this.adminid;
+  // Get user details from session storage
+  getUser(): { username: string; email: string; cus_id: number } {
+    const user = sessionStorage.getItem(this.USER_KEY);
+    return user ? JSON.parse(user) : { username: '', email: '', cus_id: 0 };
   }
 
-  getUser(): { username: string; email: string; cus_id: number} {
-    return { username: this.username, email: this.email, cus_id:this.cus_id };
-  }
-  
+  // Clear user details from session storage
   clearUser(): void {
-    this.username = "";
-    this.email = "";
-    this.cus_id = 0;
-    this.selectedOrderId = 0;
+    sessionStorage.removeItem(this.USER_KEY);
+    sessionStorage.removeItem(this.SELECTED_ORDER_ID_KEY);
+    sessionStorage.removeItem(this.ADMIN_TYPE_KEY);
+    sessionStorage.removeItem(this.ADMIN_TYPE_KEY);
   }
 
+  // Set admin ID in session storage
+  setAdminId(adminid: number): void {
+    sessionStorage.setItem(this.ADMIN_ID_KEY, adminid.toString());
+  }
+
+  // Get admin ID from session storage
+  getAdminId(): number {
+    const adminid = sessionStorage.getItem(this.ADMIN_ID_KEY);
+    return adminid ? parseInt(adminid, 10) : 0;
+  }
+
+  // Set selected order ID in session storage
   setSelectedOrderId(orderId: number): void {
-    this.selectedOrderId = orderId;
+    sessionStorage.setItem(this.SELECTED_ORDER_ID_KEY, orderId.toString());
   }
 
+  // Get selected order ID from session storage
   getSelectedOrderId(): number {
-    return this.selectedOrderId;
+    const orderId = sessionStorage.getItem(this.SELECTED_ORDER_ID_KEY);
+    return orderId ? parseInt(orderId, 10) : 0;
   }
 
-  setAdminType(admin_type: string): void{
-    this.admin_type = admin_type;
+  // Set admin type in session storage
+  setAdminType(admin_type: string): void {
+    sessionStorage.setItem(this.ADMIN_TYPE_KEY, admin_type);
   }
 
-  getAdmintype():string {
-    return this.admin_type;
+  // Get admin type from session storage
+  getAdmintype(): string {
+    const admin_type = sessionStorage.getItem(this.ADMIN_TYPE_KEY);
+    return admin_type || '';
   }
 }

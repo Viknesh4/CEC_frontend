@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UserService } from '../user.service';
+import { EmailService } from '../email.service';
+import { Observable, Subject } from 'rxjs';
 @Component({
   selector: 'app-new-tickets',
   standalone: true,
@@ -20,8 +22,9 @@ export class NewTicketsComponent {
   adminCategories: string[] = ['G', 'L', 'T'];
   userService = inject(UserService);
   http = inject(HttpClient);
+  emailcontent = {to:'sivavicky223@gmail.com',subject:'',body:''};
   apiURL: string = "https://localhost:7297/api/Ticket/Login";
-
+  apiUrlE: string  = "https://localhost:7297/api/Email/send";
   ngOnInit(): void {
     this.admin_type = this.userService.getAdmintype();
     this.getNewTickets();
@@ -49,14 +52,15 @@ export class NewTicketsComponent {
   
     // Create the update payload, only including non-null values
     const updateRequest: any = {};
-    if (status) updateRequest.status = status;
-    if (message) updateRequest.message = message;
+    if (status) {updateRequest.status = status;this.emailcontent.subject=status};
+    if (message) {updateRequest.message = message;this.emailcontent.body=message};
     if (this.userService.getAdminId()) updateRequest.assigned_admin_id = this.userService.getAdminId();
   
     // HTTP PUT request to update the ticket
     this.http.put(apiUrl, updateRequest, { responseType: 'text' }).subscribe(
       (response) => {
         alert('Ticket updated successfully!');
+        this.sendEmail(this.emailcontent);
         this.closePopup(); // Close the popup after successful update
         this.getNewTickets(); // Refresh the tickets list
       },
@@ -87,6 +91,18 @@ export class NewTicketsComponent {
     );
   }
 
+
+
+  sendEmail(email: { to: string; subject: string; body: string }): void {
+    this.http.post(this.apiUrlE, email).subscribe(
+      (response) => {
+        console.log('Email sent successfully:', response);
+      },
+      (error) => {
+        console.error('Error sending email:', error);
+      }
+    );
+  }
 
   
 

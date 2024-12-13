@@ -17,7 +17,6 @@ export class AdminloginComponent {
   userService = inject(UserService)
   http = inject(HttpClient)
   router = inject(Router);
-  
     // Initialize the form group
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
