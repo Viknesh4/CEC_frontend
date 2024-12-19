@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminlogin.component.css']
 })
 export class AdminloginComponent {
-  userService = inject(UserService)
+  showPopup: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = false;
+  adminService = inject(AdminService)
   http = inject(HttpClient)
   router = inject(Router);
     // Initialize the form group
@@ -31,17 +35,32 @@ export class AdminloginComponent {
       this.http.post('https://localhost:7297/api/Admin/login', loginData)
         .subscribe({
           next: (response:any) =>{
-            this.userService.setAdminType(response.admintype);
-            this.userService.setAdminId(response.adminid);
+            this.adminService.setAdminType(response.admintype);
+            this.adminService.setAdminId(response.adminid);
             console.log('Login successful', response);
-            alert('Login successful!');
-            this.router.navigate(['adashboard']);
+            this.triggerPopup(true, 'Login successful!');
+            
           },
           error: (err) => {
             console.error('Login failed', err);
-            alert('Login failed. Please check your credentials.');
+            this.triggerPopup(false, 'Login failed. Please check your credentials.');
           }
     });
     }
   }
+
+
+triggerPopup(isSuccess: boolean, message: string): void {
+  this.isSuccess = isSuccess;
+  this.popupMessage = message;
+  this.showPopup = true;
+
+  // Auto-hide popup after 3 seconds
+  setTimeout(() => {
+    this.showPopup = false;
+    if(isSuccess){
+      this.router.navigate(['adashboard']);
+    }
+  }, 500);
+}
 }

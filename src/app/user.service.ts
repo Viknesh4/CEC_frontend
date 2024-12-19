@@ -5,9 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   private readonly USER_KEY = 'user';
-  private readonly ADMIN_ID_KEY = 'adminid';
   private readonly SELECTED_ORDER_ID_KEY = 'selectedOrderId';
-  private readonly ADMIN_TYPE_KEY = 'admin_type';
 
   // Set user details in session storage
   setUser(username: string, email: string, cus_id: number): void {
@@ -25,19 +23,6 @@ export class UserService {
   clearUser(): void {
     sessionStorage.removeItem(this.USER_KEY);
     sessionStorage.removeItem(this.SELECTED_ORDER_ID_KEY);
-    sessionStorage.removeItem(this.ADMIN_TYPE_KEY);
-    sessionStorage.removeItem(this.ADMIN_TYPE_KEY);
-  }
-
-  // Set admin ID in session storage
-  setAdminId(adminid: number): void {
-    sessionStorage.setItem(this.ADMIN_ID_KEY, adminid.toString());
-  }
-
-  // Get admin ID from session storage
-  getAdminId(): number {
-    const adminid = sessionStorage.getItem(this.ADMIN_ID_KEY);
-    return adminid ? parseInt(adminid, 10) : 0;
   }
 
   // Set selected order ID in session storage
@@ -49,16 +34,5 @@ export class UserService {
   getSelectedOrderId(): number {
     const orderId = sessionStorage.getItem(this.SELECTED_ORDER_ID_KEY);
     return orderId ? parseInt(orderId, 10) : 0;
-  }
-
-  // Set admin type in session storage
-  setAdminType(admin_type: string): void {
-    sessionStorage.setItem(this.ADMIN_TYPE_KEY, admin_type);
-  }
-
-  // Get admin type from session storage
-  getAdmintype(): string {
-    const admin_type = sessionStorage.getItem(this.ADMIN_TYPE_KEY);
-    return admin_type || '';
   }
 }

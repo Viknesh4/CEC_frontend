@@ -1,50 +1,95 @@
+/* General Container Styling */
 .query-container {
-    max-width: 900px;
-    margin: 0 auto; /* Center the container */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    font-family: "Rubik", sans-serif;
+  max-width: 900px;
+  margin: 100px auto;
+  background-color: #ffffff; /* White background */
+  border-radius: 12px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 25px;
+  font-family: "Rubik", sans-serif;
+  margin-top: -10px;
+}
+
+/* Header Styling */
+.query-header {
+  color: #022c51; /* Delivery blue theme */
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 3px solid #d4a373; /* Gold highlight */
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  background-color: #ffffff; /* White table background */
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Table Header Styling */
+.table thead {
+  background-color: #2196f3; /* Delivery blue */
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.table th {
+  background-color: #351c15;
+  color:#ffc400 ;
+  padding: 15px;
+  font-size: 1rem;
+}
+
+/* Table Row Hover Effect */
+.table-hover tbody tr:hover {
+  background-color: rgba(33, 150, 243, 0.1); /* Light blue hover */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Table Body Styling */
+.table td {
+  padding: 15px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  color: #1a1818;
+}
+
+/* Badge Styling for Status */
+.badge {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Hover Animation for Rows */
+.query-row:hover {
+  background-color: #f8f8f8;
+  transform: scale(1.02); /* Slight zoom effect */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .query-container {
+    padding: 15px;
   }
-  
-  .query-container h5 {
-    color: #6c757d; /* Grey color matching the theme */
-    font-weight: bold;
-    border-bottom: 3px solid #6c757d;
-    display: inline-block;
+
+  .query-header {
+    font-size: 1.2rem;
   }
-  
-  .table-hover tbody tr:hover {
-    background-color: rgba(108, 117, 125, 0.1); /* Light hover effect */
+
+  .table th,
+  .table td {
+    font-size: 0.85rem;
+    padding: 10px;
   }
-  
-  .table thead {
-    background-color: #6c757d; /* Grey header background */
-    color: white;
-  }
-  
-  .table th, .table td {
-    vertical-align: middle;
-    text-align: center;
-  }
-  
-  .badge {
-    font-size: 0.9rem;
-    padding: 5px 10px;
-    border-radius: 12px;
-    
-  }
-  
-  .bg-success {
-    background-color: #198754 !important; /* Bootstrap's green */
-  }
-  
-  .bg-warning {
-    background-color: #ffc107 !important; /* Bootstrap's yellow */
-  }
-  
-  .bg-danger {
-    background-color: #dc3545 !important; /* Bootstrap's red */
-  }
-  
+}

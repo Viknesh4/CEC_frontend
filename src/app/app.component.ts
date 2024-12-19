@@ -3,15 +3,14 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "./header/header.component";
 import { filter } from 'rxjs';
-import { CreateadminComponent } from "./createadmin/createadmin.component";
-import { SuggestionComponent } from "./suggestion/suggestion.component";
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { MyProfileComponent } from "./my-profile/my-profile.component";
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, SuggestionComponent,AdminHeaderComponent],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, AdminHeaderComponent, MyProfileComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

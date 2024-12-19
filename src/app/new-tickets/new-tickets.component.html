@@ -1,26 +1,41 @@
 <div class="container">
     <h2>{{adminType}} Tickets Raised </h2>
     <!-- Tickets Table -->
-    <table class="tickets-table">
+    <div *ngIf="tickets.length === 0" class="no-tickets-message">
+      <p>No tickets available</p>
+      <img src="..//assets/image/nodata.svg" alt="" class="nodataimg">
+    </div>
+    
+    <table class="tickets-table" *ngIf="tickets.length > 0">
       <thead>
         <tr>
           <th>Ticket ID</th>
-          <th>User ID</th>
+          <th>Customer Name</th>
           <th>Date</th>
           <th>Issue</th>
           <th>Priority</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ticket of tickets" (click)="openPopup(ticket)">
+        <tr *ngFor="let ticket of tickets">
           <td>{{ ticket.ticket_id }}</td>
-          <td>{{ ticket.customer_id }}</td>
+          <td>{{ getUserNameById(ticket.customer_id) }}</td>
           <td>{{ ticket.updated_at | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ ticket.description}}</td>
+          <td>{{ ticket.description }}</td>
           <td>{{ ticket.priority }}</td>
+          <td>
+            <button type="button" class="btn btn-primary sleek-btn" (click)="openPopup(ticket)">
+              Action
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+    
+
+  <!-- "See More" Button -->
+ 
   
     <!-- Popup for Ticket Details -->
     <div class="popup" *ngIf="selectedTicket">
@@ -32,7 +47,35 @@
         <div class="description">
           <h4>Customer Issue:</h4>
           <p>{{ selectedTicket.description }}</p>
+          <button (click)="toggleSeeMore()">{{ showMore ? 'See Less' : 'View Details' }}</button>
+        
+          <!-- Additional Details (Conditional Display) -->
+          <div *ngIf="showMore" class="additional-details">
+            <p><strong>Customer name:</strong> {{ getUserNameById(selectedTicket.customer_id) }}</p>
+            <p><strong>Order Id:</strong> {{ selectedTicket.order_id }}</p>
+            <p><strong>Order Details:</strong> {{ getdescription(selectedTicket.order_id).orderItems }}</p>
+            <p><strong>Order Date:</strong> {{ getdescription(selectedTicket.order_id).orderDate | date: 'yyyy-MM-dd' }}</p>
+        
+            <!-- View Photo Section -->
+            <div class="view-photo">
+              <button (click)="viewPhoto(selectedTicket.ticket_id)">View Uploaded Photo</button>
+            </div>
+          </div>
         </div>
+        
+        <!-- Photo Popup Modal -->
+        <div class="photo-popup" *ngIf="showPhoto">
+          <div class="photo-content">
+            <button class="close-btn" (click)="closePhotoPopup()">X</button>
+            <div *ngIf="imageUrl; else noImage">
+              <img [src]="imageUrl" alt="Ticket Image" class="popup-image" />
+            </div>
+            <ng-template #noImage>
+              <p class="text-muted">No image available for this ticket.</p>
+            </ng-template>
+          </div>
+        </div>
+        
         <div class="admin-input">
           <h4>Admin Progress:</h4>
           <textarea [(ngModel)]="adminResponse" placeholder="Enter progress update..."></textarea>
@@ -52,5 +95,23 @@
         </div>
       </div>
     </div>
+    <!-- Popup Container -->
+<div *ngIf="showPopup" class="ticket-popup-container">
+  <div class="ticket-popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+    <div class="ticket-popup-header">
+      <i *ngIf="isSuccess" class="fas fa-check-circle success-icon"></i>
+      <i *ngIf="!isSuccess" class="fas fa-exclamation-circle error-icon"></i>
+      <span class="ticket-popup-title" [ngClass]="isSuccess ? 'success' : 'error'">
+        {{ isSuccess ? 'Success' : 'Error' }}
+      </span>
+    </div>
+    <div class="ticket-popup-body">
+      <p>{{ popupMessage }}</p>
+    </div>
+    <div class="ticket-popup-footer">
+      <button class="popup-close-btn sleek-btn btn-primary" (click)="closePopup()" [ngClass]="isSuccess ? 'success' : 'error'">OK</button>
+    </div>
   </div>
-  
+</div>
+
+  </div>

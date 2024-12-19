@@ -1,37 +1,65 @@
 <div class="table-container">
-    <h2>In Progress Tickets</h2>
-    <table class="tickets-table">
-      <thead>
-        <tr>
-          <th>Ticket ID</th>
-          <th>Query Description</th>
-          <th>Recent update</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ticket of ptickets" (click)="openPopup(ticket)">
-          <td>{{ ticket.ticket_id}}</td>
-          <td>{{ ticket.description }}</td>
-          <td>{{ ticket.message }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>In Progress Tickets</h2>
+  <div *ngIf="ptickets.length === 0" class="no-tickets-message">
+    <p>No tickets available</p>
+    <img src="..//assets/image/nodata.svg" alt="" class="nodataimg">
   </div>
-  
-  <!-- Popup Box for Editing Ticket -->
-  <div class="popup" *ngIf="selectedTicket">
-    <div class="popup-content">
-      <h2>Ticket ID: {{ selectedTicket.ticket_id }}</h2>
-      <label for="description"><strong><u>Admin Progress:</u></strong></label>
-      <br>
-      <br>
-      <label><strong>Recent Progress: </strong></label>
-      <p>{{selectedTicket.message}}<p>
-      <textarea id="description" [(ngModel)]="adminResponse"></textarea>
-      <div class="popup-actions">
-        <button (click)="resolveTicket()">Resolve</button>
-        <button (click)="closePopup()">Close</button>
-      </div>
+  <table class="tickets-table" *ngIf="ptickets.length > 0">
+    <thead>
+      <tr>
+        <th>Ticket ID</th>
+        <th>Query Description</th>
+        <th>Recent update</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of ptickets">
+        <td>{{ ticket.ticket_id}}</td>
+        <td>{{ ticket.description }}</td>
+        <td>{{ ticket.message }}</td>
+        <td>
+          <button type="button" class="btn btn-primary sleek-btn" (click)="openPopup(ticket)">
+            Action
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- Popup Box for Editing Ticket -->
+<div class="popup" *ngIf="selectedTicket">
+  <div class="popup-content">
+    <h2>Ticket ID: {{ selectedTicket.ticket_id }}</h2>
+    <label for="description"><strong><u>Admin Progress:</u></strong></label>
+    <br>
+    <br>
+    <label><strong>Recent Progress: </strong></label>
+    <p>{{selectedTicket.message}}<p>
+    <textarea id="description" [(ngModel)]="adminResponse"></textarea>
+    <div class="popup-actions">
+      <button (click)="resolveTicket()">Resolve</button>
+      <button (click)="closePopup()">Close</button>
     </div>
   </div>
-  
+</div>
+
+<div *ngIf="showPopup" class="ticket-popup-container">
+  <div class="ticket-popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+    <div class="ticket-popup-header">
+      <i *ngIf="isSuccess" class="fas fa-check-circle success-icon"></i>
+      <i *ngIf="!isSuccess" class="fas fa-exclamation-circle error-icon"></i>
+      <span class="ticket-popup-title" [ngClass]="isSuccess ? 'success' : 'error'">
+        {{ isSuccess ? 'Success' : 'Error' }}
+      </span>
+    </div>
+    <div class="ticket-popup-body" [ngClass]="isSuccess ? 'success' : 'error'">
+      <p>{{ popupMessage }}</p>
+    </div>
+    <div class="ticket-popup-footer">
+      <button class="popup-close-btn sleek-btn btn-primary" (click)="closePopup()" [ngClass]="isSuccess ? 'success' : 'error'">OK</button>
+    </div>
+  </div>
+</div>
+</div>
+

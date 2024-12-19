@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { CommonModule} from '@angular/common'; 
 import { Router } from '@angular/router';
 @Component({
@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 export class RegistrationComponent {
   http = inject(HttpClient);
   router = inject(Router);
+
+  showPassword: boolean = false;
+
   private passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -48,6 +51,16 @@ export class RegistrationComponent {
     }
   }
 
-  // Custom validator function to check if passwords match
+
   
+     // Method to toggle the password visibility
+     togglePasswordVisibility(): void {
+      this.showPassword = !this.showPassword;
+    }
+
+  // Custom validator function to check if passwords match
+  // Navigate to the Sign-Up page
+  navigateToSignIn() {
+    this.router.navigate(['login']);
+  }
 }

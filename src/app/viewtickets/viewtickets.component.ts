@@ -14,11 +14,13 @@ export class ViewticketsComponent implements OnInit{
   tickets:any[]=[];
   totalQueries: number = 0;
   cus_id:number = 0;
+  name: string = '';
   message = "";
   userService = inject(UserService);
   ngOnInit(): void{
     const user = this.userService.getUser();
     this.cus_id = user.cus_id;
+    this.name = user.username;
     this.fetchTicketsData();
   }
   http = inject(HttpClient)

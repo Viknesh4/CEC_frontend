@@ -1,10 +1,10 @@
 <div class="main_nav" >
-    <img src="..//assets/image/logo.png" alt="">
+    <img src="https://i.postimg.cc/Y9KLVq7F/logo-png.png" alt="">
     <ul>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#about_page">About</a></li>
+        <li><a href="#service_page">Services</a></li>
         <li><a routerLink="login" >Login</a></li>
-        <li class="button_elem"><a href="#">Contact Us</a></li>
+        <li class="button_elem"><a href="#contact_div">Contact Us</a></li>
     </ul>
 </div>
 
@@ -16,14 +16,14 @@
             <h2>seamless ticketing system</h2>
             <p>Our platform empowers admins to efficiently manage queries and <br> equips customers with the tools they need to raise and track <br> issues effortlessly</p>
             <div style="margin-top: 20px;">
-                <a routerLink="raiseTicket" class="main_button">Reach Out to Us</a>
+                <a routerLink="raiseTicket" class="main_button" href="#contact_div">Reach Out to Us</a>
             </div>
         </div>
         <img src="..//assets/image/top.png" class="main_image"/>
     </div>
 </div>
 
-<div class="service_page">
+<div id="service_page" class="service_page">
     <p class="service_top_para">We are Offering</p>
     <h1 class="service_top_h1">Query Management Services</h1>
     <div class="service_div_container">
@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<div class="about_page">
+<div id="about_page" class="about_page">
     <div class="about_text_div" >
         <p class="about_text_para">Our work process</p>
         <h1 class="about_text_h1">Discover a New Way to Resolve <br>Queries with Us!</h1>
@@ -113,7 +113,7 @@
     </div> 
 </div>
 
-<div class="contact_div">
+<div id="contact_div" class="contact_div">
     <img src="..//assets/image/customer.png" alt="" class="cantact_imag">
     <div class="main_form_div">
         <h1 class="contact_h1">Got A Problem</h1>
@@ -123,7 +123,7 @@
             <input type="email" placeholder="Email*">
         </div>
         <textarea name="text" id="" cols="30" rows="10" placeholder="Message*"></textarea>
-        <a href="#" class="send_btn">SEND</a>
+        <a routerLink="login" class="send_btn">Send</a>
     </div>
 </div>
 <div class="fotter_page">
@@ -158,7 +158,7 @@
 </div>
 <div class="bottom_fotter">
     <div class="bottom_left">
-        <img src="..//assets/image/logo.png" alt="" class="bottom_logo_image">
+        <img src="https://i.postimg.cc/Y9KLVq7F/logo-png.png" alt="" class="bottom_logo_image">
         <p>2024-2025. All rights reserved</p>
         <p>Designed By: CodeRed</p>
     </div>
@@ -168,6 +168,5 @@
         <p>Careers Guide</p>
     </div>
 </div>
-<router-outlet></router-outlet>
 
 

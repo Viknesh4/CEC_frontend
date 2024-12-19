@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { UserService } from '../user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdminService } from '../admin.service';
  // Import the directive
 
 @Component({
@@ -14,7 +15,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class AdminDashboardComponent {
   newtickets = 0;
   resolvedtickets = 0;
-  userService = inject(UserService);
+  adminService = inject(AdminService);
   http = inject(HttpClient)
   adminid = 0;
   ptickets = 0;
@@ -23,9 +24,9 @@ export class AdminDashboardComponent {
   apiURL: string = "https://localhost:7297/api/Ticket/Login";
   tickets = 0;
   ngOnInit(): void {
-    this.admin_type = this.userService.getAdmintype();
+    this.admin_type = this.adminService.getAdminType();
     this.getNewTickets();
-    this.adminid = this.userService.getAdminId();
+    this.adminid = this.adminService.getAdminId();
     this.ProgressTickets();
     this.ResolvedTickets();
 

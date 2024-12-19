@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-in-progress-tickets',
@@ -12,21 +12,33 @@ import { UserService } from '../user.service';
   styleUrl: './in-progress-tickets.component.css'
 })
 export class InProgressTicketsComponent {
+  showPopup: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = false;
   ptickets: any[] =[];
   adminResponse = '';
   emailcontent = {to:'sivavicky223@gmail.com',subject:'',body:''};
   apiUrlE: string  = "https://localhost:7297/api/Email/send";
+  apiUrlU: string  = "https://localhost:7297/api/User";
   // Selected ticket for editing
   selectedTicket: any = null;
   adminid = 0;
   http = inject(HttpClient);
-  userService = inject(UserService);
+  adminService = inject(AdminService);
+  users: any[] =[];
   ngOnInit(): void {
-    this.adminid = this.userService.getAdminId();
+    this.adminid = this.adminService.getAdminId();
     this.ProgressTickets();
-    
+    this.fetchUsersData();
   }
 
+  fetchUsersData(): void {
+    this.http.get<any[]>(this.apiUrlU).subscribe({
+      next: (data) => {
+        this.users = data;
+      }
+  });
+  }
   // Fetch in-progress tickets from API
   ProgressTickets(): void {
     this.http.get<any[]>(`https://localhost:7297/api/Ticket/in-progress-tickets/${this.adminid}`).subscribe(
@@ -48,18 +60,30 @@ export class InProgressTicketsComponent {
     const updateRequest: any = {};
     if (status) {updateRequest.status = status;this.emailcontent.subject=status};
     if (message) {updateRequest.message = message;this.emailcontent.body=message};
+    const user = this.users.find(u => u.user_id === this.selectedTicket.customer_id);
+    console.log(user.email);
+    if (user) {
+      this.emailcontent.to = user.email; // Set the email address dynamically
+    } else {
+      console.error('User not found for the ticket.');
+      this.emailcontent.to = 'sivavicky223@gmail.com'; // Default email if user not found
+    }
   
     // HTTP PUT request to update the ticket
     this.http.put(apiUrl, updateRequest, { responseType: 'text' }).subscribe(
       (response) => {
-        alert('Ticket updated successfully!');
-        this.sendEmail(this.emailcontent);
-        this.closePopup(); // Close the popup after successful update
-        this.ProgressTickets(); // Refresh the tickets list
+        this.popupMessage = 'Ticket Resolved successfully!';
+        this.showPopup = true;
+        this.isSuccess = true;  // Show the popup after successful update
+        this.adminResponse = ''; // Clear the admin response field
+        this.ProgressTickets();  // Refresh the tickets list
+        this.sendEmail(this.emailcontent); // Send email notification
       },
       (error) => {
         console.error('Error updating ticket:', error);
-        alert(`Failed to update the ticket. Error: ${error.message || error.statusText}`);
+        this.popupMessage = `Failed to resolve the ticket.`;
+        this.showPopup = true;
+        this.isSuccess = false;
       }
     );
   }
@@ -72,6 +96,7 @@ export class InProgressTicketsComponent {
   // Close popup without saving
   closePopup(): void {
     this.selectedTicket = null;
+    this.showPopup = false;
   }
 
   // Handle Resolve button click

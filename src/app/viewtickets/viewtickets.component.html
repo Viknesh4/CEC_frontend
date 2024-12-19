@@ -1,32 +1,30 @@
-<div class="query-container bg-white shadow rounded p-4 mx-auto">
-  <h5 class="text-center text-muted border-bottom pb-3 mb-4">Query Information</h5> <!-- Sleek header -->
+<div class="query-container shadow rounded p-4 mx-auto">
+  <h5 class="text-center query-header">Query Information</h5> <!-- Styled header -->
 
   <div class="table-responsive">
-    <table class="table table-hover align-middle table-striped">
-      <thead class="table-dark">
+    <table class="table table-hover align-middle">
+      <thead>
         <tr>
-          <th class="text-center">Query ID</th>
-          <th class="text-center">Customer Name</th>
-          <th class="text-center">Query Description</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">Response</th>
+          <th><strong>Query ID</strong></th>
+          <th><strong>Raised Date</strong></th>
+          <th><strong>Query Description</strong></th>
+          <th><strong>Status</strong></th>
+          <th><strong>Response</strong></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let query of tickets">
-          <td class="text-center">{{ query.ticket_id }}</td>
-          <td class="text-center">{{ query.customer_id }}</td>
-          <td class="text-center">{{ query.description }}</td>
-          <td class="text-center">
-            <span>
+        <tr *ngFor="let query of tickets" class="query-row">
+          <td>{{ query.ticket_id }}</td>
+          <td>{{ query.updated_at| date: 'yyyy-MM-dd' }}</td>
+          <td>{{ query.description }}</td>
+          <td>
+            <div class="rounded-circle p-3 me-3"><span class="badge bg-{{ query.status.toLowerCase() === 'resolved' ? 'success' : query.status.toLowerCase() === 'new' ? 'danger' : 'warning' }}-subtle 
+              text-{{ query.status.toLowerCase() === 'resolved' ? 'success' : query.status.toLowerCase() === 'new' ? 'danger' : 'warning' }} rounded-pill px-3">
               {{ query.status }}
-            </span>
+            </span></div>
+            
           </td>
-          <td class="text-center">
-            <span>
-              {{ query.message }}
-            </span>
-          </td>
+          <td>{{ query.message }}</td>
         </tr>
       </tbody>
     </table>

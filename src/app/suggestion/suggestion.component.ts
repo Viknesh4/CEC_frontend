@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./suggestion.component.css'],
 })
 export class SuggestionComponent implements OnInit {
-
+  showPopup: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = false;
   cus_id: number = 0;
   http = inject(HttpClient);
   userService = inject(UserService)
@@ -44,17 +46,28 @@ export class SuggestionComponent implements OnInit {
     this.http.post(this.apiUrl, payload).subscribe({
       next: (response) => {
         console.log('Suggestion submitted successfully:', response);
-        alert('Suggestion submitted successfully!');
+        this.triggerPopup(true, 'Suggestion submitted successfully');
         console.log(payload);
-        this.router.navigate(['userhome']);
         this.suggestionForm.reset();
        // End loading
       },
       error: (error) => {
         console.error('Error submitting suggestion:', error);
-        alert('An error occurred while submitting your suggestion.');
+         this.triggerPopup(false, 'An error occurred while submitting your suggestion.');
        // End loading
       },
     });
+  }
+
+  triggerPopup(isSuccess: boolean, message: string): void {
+    this.isSuccess = isSuccess;
+    this.popupMessage = message;
+    this.showPopup = true;
+  
+    // Auto-hide popup after 3 seconds
+    setTimeout(() => {
+      this.showPopup = false;
+      
+    }, 1000);
   }
 }
