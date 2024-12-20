@@ -1,12 +1,13 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { CommonModule} from '@angular/common'; 
+import { CommonModule } from '@angular/common'; 
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, ReactiveFormsModule,CommonModule],
+  imports: [HttpClientModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
@@ -16,23 +17,46 @@ export class RegistrationComponent {
 
   showPassword: boolean = false;
 
+  // Custom validator for password strength
+  private strongPasswordValidator: ValidatorFn = (control: AbstractControl) => {
+    const password = control.value;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password) ? null : {
+      weakPassword: 'Password must have at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+    };
+  };
+
+  // Custom validator for name (should not contain numbers)
+  private noNumbersValidator: ValidatorFn = (control: AbstractControl) => {
+    const name = control.value;
+    const nameRegex = /^[a-zA-Z\s]+$/; // Only letters and spaces are allowed
+    return nameRegex.test(name) ? null : {
+      invalidName: 'Name should not contain numbers or special characters.'
+    };
+  };
+
   private passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   };
-  // Initialize the form group for registration with the custom validator
+
+  // Initialize the form group for registration with the custom validators
   registrationForm = new FormGroup({
-    name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
+    name: new FormControl<string>('', [Validators.required, Validators.minLength(2), this.noNumbersValidator]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     phone_number: new FormControl<string>('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl<string>('', [Validators.required, Validators.minLength(8), this.strongPasswordValidator]),
     confirmPassword: new FormControl<string>('', [Validators.required]),
   }, { validators: this.passwordMatchValidator });
 
   // Method to submit the registration data to the backend
   registerUser() {
     if (this.registrationForm.valid) {
+    const emailControl = this.registrationForm.get('email');
+    if (emailControl && emailControl.value) {
+      emailControl.setValue(emailControl.value.toLowerCase());
+    }
       this.http.post('https://localhost:7297/api/User', this.registrationForm.value)
         .subscribe({
           next: (response) => {
@@ -42,8 +66,7 @@ export class RegistrationComponent {
             this.registrationForm.reset(); // Reset the form after submission
           },
           error: (err) => {
-            console.error('Error during registration:', err);
-            alert('There was an error during registration. Please try again.');
+            alert(`Error during registration: ${err.error}`);
           }
         });
     } else {
@@ -51,14 +74,11 @@ export class RegistrationComponent {
     }
   }
 
+  // Method to toggle the password visibility
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
-  
-     // Method to toggle the password visibility
-     togglePasswordVisibility(): void {
-      this.showPassword = !this.showPassword;
-    }
-
-  // Custom validator function to check if passwords match
   // Navigate to the Sign-Up page
   navigateToSignIn() {
     this.router.navigate(['login']);

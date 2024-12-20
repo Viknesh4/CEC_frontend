@@ -1,12 +1,11 @@
 /* Container for the table */
 .table-container {
-  margin: 80px 100px;
+  max-width: 1200px;
+  margin: 20px auto;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
   background-color: #050a30;
-  margin-top: 50px;
-  height: 80vh;
+  height: 90vh;
   max-height: 90vh;
 }
 

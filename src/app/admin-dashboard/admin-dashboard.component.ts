@@ -3,12 +3,13 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdminService } from '../admin.service';
+import { RouterLink } from '@angular/router';
  // Import the directive
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [HttpClientModule],  // Add BaseChartDirective to imports
+  imports: [HttpClientModule,RouterLink],  // Add BaseChartDirective to imports
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })

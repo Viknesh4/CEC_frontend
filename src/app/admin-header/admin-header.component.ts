@@ -15,7 +15,7 @@ export class AdminHeaderComponent {
   navclose() {
     this.isSidebarActive = false;
   }
-  isSidebarActive: boolean = false;
+  isSidebarActive: boolean = true;
   adminService = inject(AdminService)
   router = inject(Router)
   toggleSidebar(): void {

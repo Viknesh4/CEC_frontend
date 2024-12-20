@@ -31,6 +31,10 @@ export class AdminloginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
+      const emailControl = this.loginForm.get('email');
+      if (emailControl && emailControl.value) {
+        emailControl.setValue(emailControl.value.toLowerCase());
+      }
       const loginData = this.loginForm.value;
       this.http.post('https://localhost:7297/api/Admin/login', loginData)
         .subscribe({

@@ -9,6 +9,7 @@
       <tr>
         <th>Ticket ID</th>
         <th>Query Description</th>
+        <th>Priority</th>
         <th>Recent update</th>
         <th>Action</th>
       </tr>
@@ -17,6 +18,10 @@
       <tr *ngFor="let ticket of ptickets">
         <td>{{ ticket.ticket_id}}</td>
         <td>{{ ticket.description }}</td>
+        <td>{{ ticket.priority === 1 ? 'Critical' : 
+          ticket.priority === 2 ? 'High' : 
+          ticket.priority === 3 ? 'Medium' :
+          ticket.priority === 4 ? 'Low' : 'Unknown'  }}</td>
         <td>{{ ticket.message }}</td>
         <td>
           <button type="button" class="btn btn-primary sleek-btn" (click)="openPopup(ticket)">

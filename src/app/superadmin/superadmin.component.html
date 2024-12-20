@@ -264,9 +264,10 @@
               <td>{{ query.status }}</td>
               <td>
                 {{ 
-                  query.priority === 1 ? 'High' : 
-                  query.priority === 2 ? 'Medium' : 
-                  query.priority === 3 ? 'Low' : 'Unknown' 
+                  query.priority === 1 ? 'Critical' : 
+                  query.priority === 2 ? 'High' : 
+                  query.priority === 3 ? 'Medium' :
+                  query.priority === 4 ? 'Low' : 'Unknown' 
                 }}
               </td>
             </tr>

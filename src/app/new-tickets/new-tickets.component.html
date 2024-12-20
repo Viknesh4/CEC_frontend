@@ -23,7 +23,10 @@
           <td>{{ getUserNameById(ticket.customer_id) }}</td>
           <td>{{ ticket.updated_at | date: 'yyyy-MM-dd' }}</td>
           <td>{{ ticket.description }}</td>
-          <td>{{ ticket.priority }}</td>
+          <td>{{ ticket.priority === 1 ? 'Critical' : 
+            ticket.priority === 2 ? 'High' : 
+            ticket.priority === 3 ? 'Medium' :
+            ticket.priority === 4 ? 'Low' : 'Unknown'  }}</td>
           <td>
             <button type="button" class="btn btn-primary sleek-btn" (click)="openPopup(ticket)">
               Action

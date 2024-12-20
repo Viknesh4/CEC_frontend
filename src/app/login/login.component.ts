@@ -44,6 +44,10 @@ export class LoginComponent {
   // Method to handle login
   onSubmit() {
     if (this.loginForm.valid) {
+      const emailControl = this.loginForm.get('email');
+    if (emailControl && emailControl.value) {
+      emailControl.setValue(emailControl.value.toLowerCase());
+    }
       this.http.post('https://localhost:7297/api/User/Login', this.loginForm.value)
         .subscribe({
           next: (response:any) => {

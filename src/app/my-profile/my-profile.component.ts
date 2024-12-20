@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-my-profile',
   standalone: true,
-  imports: [RouterModule, HttpClientModule, FormsModule,CommonModule], // Add FormsModule here
+  imports: [RouterModule, HttpClientModule, FormsModule, CommonModule], // Add FormsModule here
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css'],
 })
@@ -24,9 +24,7 @@ export class MyProfileComponent {
   popupMessage: string = '';
   isSuccess: boolean = false;
 
-  
   constructor(private http: HttpClient) {}
-
 
   ngOnInit(): void {
     const userId = this.userService.getUser().cus_id; // Retrieve user_id from localStorage
@@ -51,11 +49,21 @@ export class MyProfileComponent {
   }
 
   updateProfile(userId: number): void {
+    if (!this.validateEmail(this.user.email)) {
+      this.triggerPopup(false, 'Invalid email format.');
+      return;
+    }
+
+    if (!this.validatePhoneNumber(this.user.phone_number)) {
+      this.triggerPopup(false, 'Invalid phone number format.');
+      return;
+    }
+
     const updatedUser = {
       user_id: userId,
       name: this.user.name,
       email: this.user.email,
-      phone_number: this.user.phone_number
+      phone_number: this.user.phone_number,
     };
     console.log(updatedUser.name);
     this.http.put(`${this.apiUrl}${userId}`, updatedUser).subscribe({
@@ -65,11 +73,23 @@ export class MyProfileComponent {
       },
       error: (error) => {
         this.triggerPopup(false, 'Error updating user');
-      }
+      },
     });
   }
 
   changePassword(user_id: number): void {
+    // Validate password length and strength
+    if (this.newPassword.length < 8) {
+      this.errorMessage = 'Password must be at least 8 characters long.';
+      return;
+    }
+
+    if (!this.validateStrongPassword(this.newPassword)) {
+      this.errorMessage =
+        'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+      return;
+    }
+
     // Validate new password and confirm password match
     if (this.newPassword !== this.confirmPassword) {
       this.errorMessage = 'New Password and Confirm Password do not match.';
@@ -83,19 +103,18 @@ export class MyProfileComponent {
     const requestBody = {
       userId: user_id,
       currentPassword: this.currentPassword,
-      newPassword: this.newPassword
+      newPassword: this.newPassword,
     };
 
     // Send HTTP request to change password
     this.http.put('https://localhost:7297/api/User/ChangePassword', requestBody).subscribe({
       next: () => {
         this.triggerPopup(true, 'Password Changed Successfully!');
-        // Optionally reset form values or close modal
         this.resetForm();
       },
       error: () => {
         this.triggerPopup(false, 'Error changing password.');
-      }
+      },
     });
   }
 
@@ -110,11 +129,25 @@ export class MyProfileComponent {
     this.isSuccess = isSuccess;
     this.popupMessage = message;
     this.showPopup = true;
-  
+
     // Auto-hide popup after 3 seconds
     setTimeout(() => {
       this.showPopup = false;
-      
     }, 1000);
+  }
+
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  validatePhoneNumber(phoneNumber: string): boolean {
+    const phoneRegex = /^[0-9]{10}$/; 
+    return phoneRegex.test(phoneNumber);
+  }
+
+  validateStrongPassword(password: string): boolean {
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return strongPasswordRegex.test(password);
   }
 }
