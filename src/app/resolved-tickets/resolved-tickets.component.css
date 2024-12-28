@@ -1,0 +1,105 @@
+/* Container styles */
+.container {
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #0000001a;
+  background-color: #050a30;
+
+}
+
+/* Header styles */
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.no-tickets-message {
+  text-align: center;
+  color: #dedada;
+  font-size: 16px;
+  width: 100%;
+}
+.nodataimg {
+  height: 400px;
+}
+
+/* Table styles */
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  overflow: hidden;
+}
+thead tr th {
+  background-color: #d1d1d1;
+  color: #000;
+  font-weight: 700;
+}
+.ticket-table th, .ticket-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd
+}
+
+.ticket-table th {
+  background-color: #5CB6F9;
+  color: white;
+  font-weight: 400;
+}
+
+.ticket-table tr:hover {
+  background-color:#d9e9f4;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+.page-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.current-page {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.prev-next {
+  padding: 8px 20px;
+}
+
+.prev-next:disabled {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,206 @@
+/* General body styling */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Content container */
+.content {
+  margin: 0 auto;
+  margin-top: -40px;
+  max-width: 1200px;
+  padding: 40px 20px;
+}
+
+/* Username Section */
+.username-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.greeting-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #240b5d;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.email-text {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #004b8d;
+  margin-bottom: 20px;
+  border-left: 4px solid #b48250;
+  padding-left: 10px;
+}
+
+/* Table Section */
+.table-section {
+  background: linear-gradient(to right, #ffffff, #f8f8f8);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  animation: slideIn 1s ease-in-out;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th {
+  background-color: #351c15;
+  color: #ffc400;
+  font-size: 1.1rem;
+  text-align: left;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.order-table td {
+  background-color: #fff;
+  font-size: 1rem;
+  color: #555;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.order-table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.order-table tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Raise Ticket Button */
+.raise-ticket-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #240b5d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.raise-ticket-btn:hover {
+  background-color: #92471e;
+  color:#ffc400;
+  transform: scale(1.05);
+}
+
+/* No Orders Section */
+.no-orders {
+  text-align: center;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.no-orders-img {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.no-orders-text {
+  font-size: 1.2rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.explore-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  color: white;
+  background-color: #004b8d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #b48250;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .greeting-text {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .order-table th, .order-table td {
+    font-size: 0.9rem;
+  }
+
+  .raise-ticket-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .explore-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.wave-emoji {
+  font-size: 1.5em; /* Adjust emoji size */
+  margin-left: 5px; /* Add some spacing */
+  animation: wave 1.5s infinite; /* Add waving animation */
+}
+
+/* Waving animation */
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}

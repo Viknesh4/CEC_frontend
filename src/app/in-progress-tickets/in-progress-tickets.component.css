@@ -1,0 +1,335 @@
+/* Container for the table */
+.table-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #050a30;
+  height: 90vh;
+  max-height: 90vh;
+}
+
+.no-tickets-message {
+  text-align: center;
+  color: #dedada;
+  font-size: 16px;
+  width: 100%;
+}
+.nodataimg {
+  height: 400px;
+}
+/* Header */
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Table Styling */
+.tickets-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+thead tr th {
+  background-color: #d1d1d1;
+  color: #000;
+}
+.tickets-table th, .tickets-table td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tickets-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  background-color: #f8f9fa;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tickets-table td {
+  background-color: #fff;
+}
+
+.tickets-table tr:hover {
+  background-color: #bad7ec;
+  cursor: pointer;
+}
+
+/* Popup Styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Popup Content */
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.popup textarea {
+  width: 95%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.popup-actions button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Popup Success/Error Styles */
+.ticket-popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ticket-popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  animation: popupSlideIn 0.3s ease-in-out;
+  text-align: center;
+}
+
+/* Success Message Background */
+.ticket-popup-content.success {
+  background-image: url('https://crm-frontend.s3.eu-north-1.amazonaws.com/image/popup_bg.jpg');
+  opacity: 1;
+  width: 100%;
+  color: #28a745;
+   /* Green Gradient for success */
+}
+.ticket-popup-title.success {
+  color: #28a745;
+}
+.ticket-popup-body.success {
+  color: #28a745;
+}
+.popup-close-btn.success {
+  background-color: #28a745;
+}
+/* Error Message Background */
+.ticket-popup-content.error {
+  background-image: url('https://crm-frontend.s3.eu-north-1.amazonaws.com/image/popup_bg.jpg');
+  opacity: 1;
+  width: 100%;
+  color: red;
+}
+.ticket-popup-title.error {
+  color: red;
+}
+.ticket-popup-body.error {
+  color: red;
+}
+.popup-close-btn.error {
+  background-color: red;
+}
+.ticket-popup-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.ticket-popup-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Success/Error Icon Styles */
+.success-icon {
+  background-color: #28a745; /* Green for success */
+  font-size: 2rem;
+}
+
+.error-icon {
+  color: #dc3545; /* Red for error */
+  font-size: 2rem;
+}
+
+.ticket-popup-body {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Close Button */
+.popup-close-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.popup-close-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+.popup-close-btn.error:hover {
+  background-color: red;
+  transform: translateY(-3px);
+}
+.popup-close-btn.success {
+  background-color: #28a745;
+}
+.popup-close-btn.success:hover {
+  background-color: #28a745;
+  transform: translateY(-3px);
+}
+.sleek-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  
+}
+/* Animations */
+@keyframes slideUp {
+  from {
+      transform: translateY(10%);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+@keyframes popupSlideIn {
+  from {
+      transform: translateY(-50%);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+.page-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.current-page {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.prev-next {
+  padding: 8px 20px;
+}
+
+.prev-next:disabled {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,43 @@
+<div class="content">
+  <!-- Username Section -->
+  <section class="username-section">
+    <h1 class="greeting-text">Hello, {{ username }}!<span class="wave-emoji">👋</span></h1>
+    <p class="email-text">Welcome back! Here's an overview of your recent orders.</p>
+  </section>
+
+  <!-- Table Section: Show only if there are orders -->
+  <section *ngIf="orders.length > 0" class="table-section">
+    <h2 class="section-title">Your Order Details</h2>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Order Name</strong></th>
+          <th><strong>Date</strong></th>
+          <th><strong>Action</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.orderItems }}</td>
+          <td>{{ order.orderDate | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            <button
+              class="raise-ticket-btn"
+              (click)="raiseTicket(order.orderId)">
+              Raise Ticket
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- If there are no orders -->
+  <section *ngIf="orders.length === 0" class="no-orders">
+    <img src="https://i.postimg.cc/jqcR5mQP/IMG-20241218-WA0004.jpg" alt="No orders" class="no-orders-img" />
+    <p class="no-orders-text">No orders found. Explore our store to place a new order!</p>
+    <button class="explore-btn">Explore Now</button>
+  </section>
+</div>

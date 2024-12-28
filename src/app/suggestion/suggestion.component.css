@@ -1,0 +1,251 @@
+/* Base styles */
+.suggestion-container {
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: #ffffff; /* White background */
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Smooth shadow */
+  font-family: "Rubik", sans-serif;
+  overflow: hidden;
+  position: relative;
+  margin-top: -30px;
+}
+
+/* Header styling */
+.header h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #240b5d; /* Delivery blue */
+  border-bottom: 4px solid #d4a373; /* Gold underline */
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Form styles */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #ffc400; /* Blue border on focus */
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+  outline: none;
+}
+
+.text-danger {
+  font-size: 0.85rem;
+  color: #f44336; /* Red for errors */
+  margin-top: 5px;
+}
+
+/* Submit button */
+.button-container {
+  text-align: center;
+}
+
+.btn-submit {
+  background-color: #240b5d; /* Delivery blue */
+  color: #f1f1f1;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+}
+
+.btn-submit:hover {
+  background-color: #351c15; /* Gold hover effect */
+  color: #ffc400;
+  transform: translateY(-3px); /* Lift button on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.suggestion-content h5 {
+  font-size: 1.2rem;
+  color: #2196f3; /* Delivery blue */
+  margin: 0;
+}
+
+.suggestion-content p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0 0;
+}
+
+.suggestion-date {
+  font-size: 0.9rem;
+  color: #999;
+  background-color: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* Floating effect */
+.suggestion-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background-color: #2196f3; /* Blue floating circle */
+  border-radius: 50%;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.suggestion-container::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background-color: #d4a373; /* Gold floating circle */
+  border-radius: 50%;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+
+
+/* Popup Container */
+.popup-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .suggestion-container {
+    padding: 20px;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  .btn-submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+
+  .suggestion-content h5 {
+    font-size: 1rem;
+  }
+
+  .suggestion-content p {
+    font-size: 0.9rem;
+  }
+
+  .suggestion-date {
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+}
+
+

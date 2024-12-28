@@ -1,0 +1,146 @@
+/* General Container Styling */
+.query-container {
+  max-width: 900px;
+  margin: 100px auto;
+  background-color: #ffffff; /* White background */
+  border-radius: 12px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 25px;
+  font-family: "Rubik", sans-serif;
+  margin-top: -10px;
+}
+
+/* Header Styling */
+.query-header {
+  color: #022c51; /* Delivery blue theme */
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 3px solid #d4a373; /* Gold highlight */
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  background-color: #ffffff; /* White table background */
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Table Header Styling */
+.table thead {
+  background-color: #2196f3; /* Delivery blue */
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.table th {
+  background-color: #351c15;
+  color:#ffc400 ;
+  padding: 15px;
+  font-size: 1rem;
+}
+
+/* Table Row Hover Effect */
+.table-hover tbody tr:hover {
+  background-color: rgba(33, 150, 243, 0.1); /* Light blue hover */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Table Body Styling */
+.table td {
+  padding: 15px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  color: #1a1818;
+}
+
+/* Badge Styling for Status */
+.badge {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Hover Animation for Rows */
+.query-row:hover {
+  background-color: #f8f8f8;
+  transform: scale(1.02); /* Slight zoom effect */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .query-container {
+    padding: 15px;
+  }
+
+  .query-header {
+    font-size: 1.2rem;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
+
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+.page-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.current-page {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.prev-next {
+  padding: 8px 20px;
+}
+
+.prev-next:disabled {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}

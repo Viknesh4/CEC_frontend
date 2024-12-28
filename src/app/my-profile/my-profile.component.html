@@ -1,0 +1,114 @@
+<div class="center-container">
+  <div class="profile-card card shadow-lg position-relative">
+    <!-- User Image -->
+    <div class="card-header text-center bg-gradient">
+      <img
+        src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/userlogoprofile.svg"
+        alt="User Image"
+        class="rounded-circle border border-3 border-light"
+        style="width: 120px; height: 120px; object-fit: cover;"
+      />
+      <h5 class="text-dark mt-3">{{ user.name }}</h5>
+    </div>
+    <!-- User Details -->
+    <div class="card-body">
+      <h6 class="card-title text-secondary text-center mb-4">User Information</h6>
+      <ul class="list-group list-group-flush mb-4">
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
+          <strong class="text-dark">User Id:</strong> <span class="float-end text-muted">{{ user.user_id }}</span>
+        </li>
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
+          <strong class="text-dark">Email:</strong> <span class="float-end text-muted">{{ user.email }}</span>
+        </li>
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
+          <strong class="text-dark">Mobile Number:</strong> <span class="float-end text-muted">{{ user.phone_number }}</span>
+        </li>
+      </ul>
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary buttton" (click)="editProfile = !editProfile">Edit Profile</button>
+        <button type="button" class="btn btn-success buttton" (click)="editPassword = !editPassword">Update Password</button>
+      </div>
+    </div>
+
+    <!-- Edit Profile Card (Appears on top) -->
+    <div *ngIf="editProfile" class="card-overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4 w-75">
+        <h5 class="text-center text-secondary mb-4">Edit Profile</h5>
+        <form (ngSubmit)="updateProfile(user.user_id)">
+          <div class="mb-4">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" [(ngModel)]="user.name" name="name" class="form-control" />
+          </div>
+          <div class="mb-4">
+            <label for="phone_number" class="form-label">Mobile Number</label>
+            <input type="text" id="phone_number" [(ngModel)]="user.phone_number" name="phone_number" class="form-control" />
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-primary">Save Changes</button>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-secondary" (click)="editProfile = false">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Update Password Card (Appears on top) -->
+    <div *ngIf="editPassword" class="card-overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4 w-75">
+        <h5 class="text-center text-secondary mb-4">Change Password</h5>
+        <form id="passwordForm" (ngSubmit)="changePassword(user.user_id)">
+          <div class="mb-4">
+            <label for="currentPassword" class="form-label">Your Current Password:</label>
+            <input
+              type="password"
+              id="currentPassword"
+              [(ngModel)]="currentPassword"
+              name="currentPassword"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="newPassword" class="form-label">New Password:</label>
+            <input
+              type="password"
+              id="newPassword"
+              [(ngModel)]="newPassword"
+              name="newPassword"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="confirmPassword" class="form-label">Confirm New Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+            />
+          </div>
+          <div class="text-danger" id="errorMessage">{{ errorMessage }}</div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-secondary" (click)="editPassword = false">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showPopup" class="popup-container">
+  <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+    <span class="popup-icon">
+      <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+      <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+    </span>
+    <div class="popup-message">
+      <p>{{ popupMessage }}</p>
+    </div>
+  </div>
+</div>

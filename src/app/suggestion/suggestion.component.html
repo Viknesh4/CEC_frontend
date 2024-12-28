@@ -1,0 +1,56 @@
+<div class="suggestion-container">
+  <div class="header">
+    <h2>Suggestion Forum</h2>
+  </div>
+
+  <!-- Suggestion Form -->
+  <form (ngSubmit)="submitSuggestion()" [formGroup]="suggestionForm" class="form-container">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="form-control"
+        placeholder="Enter a title for your suggestion"
+      />
+      <div *ngIf="suggestionForm.get('title')?.invalid && suggestionForm.get('title')?.touched" class="text-danger">
+        Title is required.
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        rows="5"
+        placeholder="Describe your suggestion in detail"
+      ></textarea>
+      <div *ngIf="suggestionForm.get('description')?.invalid && suggestionForm.get('description')?.touched" class="text-danger">
+        Description is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="button-container">
+      <button type="submit" class="btn-submit" [disabled]="suggestionForm.invalid">
+        Submit Suggestion
+      </button>
+    </div>
+  </form>
+  <div *ngIf="showPopup" class="popup-container">
+    <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+      <span class="popup-icon">
+        <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+        <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+      </span>
+      <div class="popup-message">
+        <p>{{ popupMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>

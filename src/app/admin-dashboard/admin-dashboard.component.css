@@ -1,0 +1,107 @@
+.dashboard-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.analytics-cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  max-width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  font-size: 1.25em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card .stat {
+  font-size: 2em;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.visualizations {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensures the charts wrap on smaller screens */
+}
+
+.chart-container {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.chart-container h3 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.chart {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.chart-container {
+  flex: 1;
+}
+
+.chart-container h3 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.visualizations .chart-container {
+  margin-bottom: 20px;
+  min-width: 200px; /* Ensures the charts are not too small */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .analytics-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .visualizations {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .chart-container {
+    width: 100%; /* Ensures charts take full width on small screens */
+  }
+}

@@ -1,0 +1,195 @@
+
+  <!-- Header Section -->
+  <div class="main_card_des">
+    <img src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/raise_ticket2.png" alt="raiseticket" >
+    <div style="display: flex; flex-direction: column; justify-content: center;  max-width: 850px;">
+      <div class="text-center">
+        <h2 class=" fw-bold" style="color:#240b5d">Raise a Ticket</h2>
+        <p class="text-muted">Submit your request, and we’ll resolve it swiftly.</p>
+      </div>
+      <!-- Ticket Form Section -->
+      <div style="">
+        <div>
+          <form
+            [formGroup]="ticketForm"
+            (ngSubmit)="raiseTicket()"
+            class="bg-white shadow p-4 rounded sleek-form"
+          >
+            <!-- Category Selection -->
+            <div class="mb-4">
+              <label for="category" class="form-label fw-semibold">Category</label>
+              <select
+                id="category"
+                class="form-select sleek-input"
+                formControlName="category"
+                (change)="onCategoryChange($event)"
+              >
+                <option value="" disabled selected>Select a category</option>
+                <option *ngFor="let category of categories" [value]="category.name">
+                  {{ category.name }}
+                </option>
+              </select>
+              <small
+                *ngIf="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched"
+                class="text-danger"
+              >
+                Please select a category.
+              </small>
+            </div>
+
+            <!-- Issue (Subcategory) -->
+            <div class="mb-4" *ngIf="issues.length > 0">
+              <label for="issues" class="form-label fw-semibold">Issue</label>
+              <select
+                id="issues"
+                class="form-select sleek-input"
+                formControlName="title"
+                (change)="setPriorityBasedOnIssue($event)"
+              >
+                <option value="" disabled selected>Select an issue</option>
+                <option *ngFor="let issue of issues" [value]="issue.title">
+                  {{ issue.title }}
+                </option>
+              </select>
+              <small
+                *ngIf="ticketForm.get('title')?.invalid && ticketForm.get('title')?.touched"
+                class="text-danger"
+              >
+                Please select an issue.
+              </small>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-semibold">Description</label>
+              <textarea
+                id="description"
+                class="form-control sleek-input"
+                formControlName="description"
+                rows="4"
+                placeholder="Describe the issue in detail"
+              ></textarea>
+              <small
+                *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched"
+                class="text-danger"
+              >
+                Description is required.
+              </small>
+            </div>
+
+            <!-- Single Image Upload -->
+            <div class="mb-3">
+              <label for="imageUpload" class="form-label">Upload Image (Optional)</label>
+              <input 
+                type="file" 
+                class="form-control" 
+                id="imageUpload" 
+                (change)="onFileSelected($event)" 
+                accept="image/*"
+              />
+              <small class="text-muted">You can upload a single image.</small>
+            </div>
+
+            <!-- Preview Selected File -->
+            <div *ngIf="selectedFile" class="mb-3">
+              <h6>Selected File:</h6>
+              <p>{{ selectedFile.name }}</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <button
+                type="submit"
+                class="btn btn-primary w-100 me-2 sleek-btn"
+                [disabled]="ticketForm.invalid"
+              >
+                Raise Ticket
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary w-100 ms-2 sleek-btn"
+                (click)="ticketForm.reset(); issues = []; selectedFile = null;" 
+              >
+                Reset
+              </button>
+            </div>
+
+            <!-- Help Button -->
+            <div class="text-center mt-4">
+              <button
+                type="button"
+                class="btn btn-info sleek-btn"
+                (click)="openHelpModal()"
+              >
+                <i class="bi bi-info-circle"></i> Need Help?
+              </button>
+            </div>
+          </form>
+        </div> 
+      </div>
+    </div>
+    <img src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/rise_ticket1.png" alt="look" style="height: 280px;">
+  </div>
+  <!-- Help Modal -->
+  <div class="modal-background" *ngIf="isModalOpen" (click)="closeHelpModal()">
+    <div
+      class="modal-content"
+      (click)="$event.stopPropagation()" 
+    >
+      <div class="modal-header">
+        <h5 class="modal-title">Help & Support</h5>
+        <button class="close" (click)="closeHelpModal()">✖</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- FAQ Section -->
+        <h6 class="section-title">Frequently Asked Questions</h6>
+        <div class="faq-container">
+          <div class="faq-item">
+            <strong>What is a ticket?</strong>
+            <p>
+              A ticket is a formal way to report an issue or request support from our team.
+            </p>
+          </div>
+          <div class="faq-item">
+            <strong>How can I track my ticket?</strong>
+            <p>
+              Once raised, you'll receive a ticket ID. Use it to track your ticket's status.
+            </p>
+          </div>
+          <div class="faq-item">
+            <strong>Who handles my ticket?</strong>
+            <p>
+              Our dedicated team of admins handles tickets based on the selected category.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Us Section -->
+        <h6 class="section-title">Contact Us</h6>
+        <div class="contact-info">
+          <p>
+            Email: <a href="mailto:support@example.com">support&#64;cec.com</a><br />
+            Phone: <a href="tel:+18001234567">+1 800 123 4567</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn sleek-btn" (click)="closeHelpModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success/Failure Popup -->
+  <div class="notification-popup" *ngIf="showPopup">
+    <div class="popup-content" [ngClass]="{'success': isSuccess, 'error': !isSuccess}">
+      <div class="popup-icon">
+        <i [ngClass]="isSuccess ? 'bi bi-check-circle-fill' : 'bi bi-x-circle-fill'"></i>
+      </div>
+      <div class="popup-message">
+        <p>{{ popupMessage }}</p>
+      </div>
+    </div>
+  </div>
+

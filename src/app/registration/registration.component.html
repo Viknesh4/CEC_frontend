@@ -1,0 +1,76 @@
+<div class="main-bd">
+  <div class="card-body">
+    <h2>Registration</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter your name" required />
+        <small class="error" *ngIf="registrationForm.get('name')?.touched && registrationForm.get('name')?.invalid">
+          Name must not contain numbers or special characters and should be at least 2 characters long.
+        </small>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" required />
+        <small class="error" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
+          Please provide a valid email address.
+        </small>
+      </div>
+  
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" formControlName="phone_number" class="form-control" placeholder="Enter your phone number" required />
+        <small class="error" *ngIf="registrationForm.get('phone_number')?.touched && registrationForm.get('phone_number')?.invalid">
+          Phone number must be exactly 10 digits.
+        </small>
+      </div>
+  
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div class="password-container">
+          <input type="{{ showPassword ? 'text' : 'password' }}" id="password" formControlName="password" class="form-control" placeholder="Enter your password" required />
+          <span (click)="togglePasswordVisibility()" class="password-toggle-icon">
+            <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+          </span>
+        </div>
+        <small class="error" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
+          Password must be at least 8 characters long and include an uppercase letter, lowercase letter, number, and special character.
+        </small>
+      </div>
+  
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <div class="password-container">
+          <input type="{{ showPassword ? 'text' : 'password' }}" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm your password" required />
+          <span (click)="togglePasswordVisibility()" class="password-toggle-icon">
+            <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+          </span>
+        </div>
+        <small class="error" *ngIf="registrationForm.errors?.['mismatch'] && registrationForm.get('confirmPassword')?.touched">
+          Passwords do not match. Please re-enter.
+        </small>
+      </div>
+  
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary btn-register" [disabled]="!registrationForm.valid">Register</button>
+      <p>Already have an account? <button class="btn btn-link register" (click)="navigateToSignIn()">Sign in</button></p>
+    </form>
+  </div>
+  <div *ngIf="showPopup" class="popup-container">
+    <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+      <span class="popup-icon">
+        <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+        <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+      </span>
+      <div class="popup-message">
+        <p>{{ popupMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>

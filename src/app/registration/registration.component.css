@@ -1,0 +1,252 @@
+.main-bd {
+  /* 
+  background: linear-gradient(135deg, #f0f8ff, #e0f7fa, #bbdefb);
+  height: 100vh;
+  padding: 20px;
+  
+  color: #333; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background-image: url('https://crm-frontend.s3.eu-north-1.amazonaws.com/image/ulogin.jpg'); /* Replace with the path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+
+
+/* Card Styling */
+.card-body {
+  width: 100%;
+  max-width: 450px;
+  margin: 50px auto;
+  background: linear-gradient(135deg, #f8f1e5, #f3e0b5, #e0c89d);
+  border-radius: 15px;
+  padding: 20px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+.card-body:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #b48250, #d4a373, #e9c46a);
+  animation: gradientMove 3s infinite linear;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Header Styling */
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #007bff;
+  animation: slideIn 0.8s ease-out;
+  
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #bbdefb;
+  font-size: 15px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #b48250;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+/* Password Icon */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.password-toggle-icon:hover {
+  color: #b48250;
+}
+
+/* Button */
+.btn-register {
+  background: linear-gradient(90deg, #007bff, #64b5f6);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+  background: linear-gradient(90deg,  #b48250, #d4a373);
+  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+}
+
+/* Error Messages */
+.error {
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 30px 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+}
+.register{
+  font-size: 20px;
+}
+
+.register:hover{
+  color: #b48250;
+}
+
+
+/* Popup Container */
+.popup-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}

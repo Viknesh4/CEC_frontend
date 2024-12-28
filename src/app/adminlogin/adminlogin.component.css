@@ -1,0 +1,141 @@
+.main_bg {
+  background-image: url('https://crm-frontend.s3.eu-north-1.amazonaws.com/image/login_bg.jpg');
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 800px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffffc7;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.login-container img {
+  height: 60px;
+  margin-left: 80px;
+}
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 0px none #cccccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007BFF;
+  font-weight: 400;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #a9a6a6;
+  cursor: not-allowed;
+}
+
+small {
+  color: red;
+  font-size: 12px;
+}
+
+/* Popup Container */
+.popup-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px; /* Adjust based on input padding */
+  top: 70%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #6c757d; /* Optional: match icon color with the input border */
+}

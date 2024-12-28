@@ -1,0 +1,184 @@
+.center-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Ensures proper positioning of background and overlay */
+}
+
+/* Profile Card */
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1; /* Ensures the profile card stays above the blur */
+}
+
+/* Gradient Header */
+.bg-gradient {
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+}
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+}
+
+/* Blur effect on the background */
+.card-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+  backdrop-filter: blur(5px); /* Apply blur to the background */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Card Styling */
+.card {
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+/* Card Headers */
+.card-header {
+  background-color: transparent;
+}
+
+.card-body .form-control {
+  border-radius: 8px;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-body .form-control:focus {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Form Styling */
+.form-label {
+  font-size: 1rem;
+}
+
+.buttton {
+  justify-self: center;
+  width: 60%;
+}
+.btn-outline-primary {
+
+  border-color: #007bff;
+  color: #007bff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Overlay and Animations */
+.card-overlay .card {
+  width: 75%;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.d-grid {
+  display: grid;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+.popup-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
