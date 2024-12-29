@@ -1,4 +1,10 @@
-<main [class.full-width]="!showNav" class="bg-light">
+<nav class="supernav">
+  <img src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/cecw.png" alt="Logo" class="logo_img_super">
+  <button (click)="logout()" class="logout_button_super">Logout</button>
+</nav>
+
+<main class="bg-light">
+  
   <div class="container py-5">
     <div class="text-center mb-5" >
       <h2 class="fw-bold">Welcome, Super Admin!</h2>
@@ -9,7 +15,7 @@
     <div class="row gy-4">
       <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
-          <div class="card-body text-center">
+          <div class="card-body text-center" (click)="toggleTicketForm()">
             <h6 class="text-uppercase text-muted">Total Queries</h6>
             <h3 class="display-6 text-primary">{{ totalQueries }}</h3>
           </div>
@@ -17,7 +23,7 @@
       </div>
       <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
-          <div class="card-body text-center">
+          <div class="card-body text-center" (click)="toggleUserTable()">
             <h6 class="text-uppercase text-muted">Active Users</h6>
             <h3 class="display-6 text-primary">{{ totalUsers }}</h3>
           </div>
@@ -25,7 +31,7 @@
       </div>
       <div class="col-md-3">
         <div class="card border-0 shadow-sm rounded-lg">
-          <div class="card-body text-center" [routerLink]="'/suggestions'">
+          <div class="card-body text-center" (click)="toggleAdminTable()">
             <h6 class="text-uppercase text-muted">Active Admins</h6>
             <h3 class="display-6 text-primary">{{ totalAdmins }}</h3>
           </div>
@@ -377,6 +383,17 @@
         </table>
       </div>
     </form>
+    </div>
+  </div>
+  <div *ngIf="showPopup" class="popup-container">
+    <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+      <span class="popup-icon">
+        <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+        <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+      </span>
+      <div class="popup-message">
+        <p>{{ popupMessage }}</p>
+      </div>
     </div>
   </div>
 </main>

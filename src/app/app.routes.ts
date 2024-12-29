@@ -16,6 +16,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { VsuggestionComponent } from './vsuggestion/vsuggestion.component';
 import { SuperloginComponent } from './superlogin/superlogin.component';
+import { homeGuard } from './home.guard';
 
 
 export const routes: Routes = [
@@ -24,7 +25,7 @@ export const routes: Routes = [
     {path:'alogin',component:AdminloginComponent,data: { navbarType: 'none' }},
     {path:'register',component:RegistrationComponent,data: { navbarType: 'none' }},
     {path:'login',component:LoginComponent,data: { navbarType: 'none' }},
-    {path:'superadmin_',component:superadminComponent,data: { navbarType: 'none' }},
+    {path:'superadmin_',component:superadminComponent,data: { navbarType: 'none' }, canActivate: [homeGuard]},
     {path:'addadmin',component:CreateadminComponent,data: { navbarType: 'none' }},
     {path:'suggestion',component:SuggestionComponent,data: { navbarType: 'customer' }},
     {path:'userhome',component:UserhomeComponent,data: { navbarType: 'customer' }},

@@ -1,12 +1,20 @@
-<div class="main_nav" >
-    <img src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/cecw.png" alt="">
+<div class="main_nav">
+    <img src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/cecw.png" alt="Logo">
     <ul>
-        <li><a href="#about_page">About</a></li>
-        <li><a href="#service_page">Services</a></li>
-        <li><a routerLink="login" >Login</a></li>
-        <li class="button_elem"><a href="#contact_div">Contact Us</a></li>
+      <li><a href="#about_page">About</a></li>
+      <li><a href="#service_page">Services</a></li>
+      <li>
+        <a (click)="toggleDropdown()" data-toggle="dropdown">Login</a>
+        <ul class="dropdown" [class.visible]="dropdownVisible">
+          <li routerLink="login">User</li>
+          <li routerLink="alogin">Admin</li>
+          <li routerLink="superlogin">Super Admin</li>
+        </ul>
+      </li>
+      <li class="button_elem"><a href="#contact_div">Contact Us</a></li>
     </ul>
-</div>
+  </div>
+  
 
 <div class="home_page">
     <div class="main_body">

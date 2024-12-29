@@ -82,6 +82,6 @@ triggerPopup(isSuccess: boolean, message: string): void {
     if(isSuccess){
       this.router.navigate(['adashboard']);
     }
-  }, 500);
+  }, 1000);
 }
 }

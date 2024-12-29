@@ -88,6 +88,6 @@ export class LoginComponent {
       if(isSuccess){
         this.router.navigate(['userhome']);
       }
-    }, 800);
+    }, 900);
   }
 }

@@ -3,12 +3,12 @@
     <button id="menu-btn" class="btn btn-dark" (click)="toggleSidebar() "title="Options">
       <i class="bi bi-list"></i> 
     </button>
-    <img [routerLink]="'/adashboard'" style="cursor: pointer;" src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/CEC_brown.png" alt="Logo" >
+    <a routerLink="adashboard"><img [routerLink]="'/adashboard'" style="cursor: pointer;" src="https://crm-frontend.s3.eu-north-1.amazonaws.com/image/CEC_brown.png" alt="Logo" ></a> 
     <button class="btn btn-danger" (click)="logout()">Logout</button>
   </header>
       
       <!-- Sidebar -->
-      <aside class="sidebar bg-light shadow" [class.active]="isSidebarActive" id="sidebar">
+      <aside class="sidebar bg-light shadow" id="sidebar">
         <nav (click)="navclose()" class="nav flex-column mt-5 p-3">
           <a routerLink="adashboard" class="nav-link text-dark fw-bold" title="View the Dashboard for Ticket Management">
             <i class="bi bi-card-checklist" style="color: black"></i> Home

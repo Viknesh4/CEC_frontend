@@ -2,14 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://crm-frontend.s3.eu-north-1.amazonaws.com/image/superlogin.jpeg') no-repeat center center fixed;
+  background: url("https://crm-frontend.s3.eu-north-1.amazonaws.com/bgsl.png") no-repeat center center fixed;
   background-size: cover;
+  opacity: 0.8;
 }
 
 .login-container {
-  width: 100%;
-  max-width: 400px;
-  
+  width: 100%;  
 }
 
 .login-card {
@@ -19,12 +18,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   text-align: center;
+  width:350px;
 }
 
 .login-card h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #f177ed;
+  color: #1804f4;
 }
 
 .form-group {
@@ -36,7 +36,7 @@
   display: block;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: #4b4e50;
+  color: #000000;
 }
 
 .form-control {
@@ -45,13 +45,13 @@
   border-radius: 10px;
   border: none;
   background: rgba(255, 255, 255, 0.2);
-  color: #343232;
+  color: #000000;
   font-size: 1rem;
 }
 
 .form-control:focus {
   outline: none;
-  box-shadow: 0 0 5px 2px rgba(244, 224, 77, 0.8);
+  box-shadow: 0 0 5px 2px rgba(0, 42, 255, 0.8);
 }
 
 .btn-primary {
@@ -59,17 +59,14 @@
   padding: 0.8rem;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #f4e04d, #eebc1d);
-  color: #1e3c72;
+  background: linear-gradient(135deg, #2534d8, #133f8f);
+  color: #ffffff;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, #eebc1d, #f4e04d);
-}
 
 .error-message {
   margin-top: 1rem;
@@ -86,4 +83,74 @@
   height: 100vh; /* Ensures it takes up full screen height */
   box-sizing: border-box;
   padding: 20px;
+}
+
+/* Popup Container */
+.popup-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
 }

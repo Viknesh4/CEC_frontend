@@ -2,7 +2,7 @@
 <div class="main">
   <div class="login-container">
   <div class="login-card">
-    <h2>🌟 SuperAdmin Login 🌟</h2>
+    <h2> SuperAdmin Login </h2>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
         <label for="username">Username</label>
@@ -39,6 +39,17 @@
         {{ errorMessage }}
       </div>
     </form>
+  </div>
+</div>
+<div *ngIf="showPopup" class="popup-container">
+  <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+    <span class="popup-icon">
+      <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+      <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+    </span>
+    <div class="popup-message">
+      <p>{{ popupMessage }}</p>
+    </div>
   </div>
 </div>
 </div>

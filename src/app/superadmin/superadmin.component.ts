@@ -2,8 +2,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { SuperadminService } from '../superadmin.service';
 
 @Component({
   selector: 'app-superadmin',
@@ -13,7 +14,10 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./superadmin.component.css'],
 })
 export class superadminComponent {
-
+  showPopup: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = false;
+  router = inject(Router);
   showNav: boolean = false;
   showAdminTable: boolean = false;
   showUserTable: boolean = false;
@@ -21,8 +25,13 @@ export class superadminComponent {
   showUserAdd: boolean = false;
   showQueryTable: boolean = false;
   showSuggestionTable: boolean = false;
+  superadminService = inject(SuperadminService);
   toggleNav() {
     this.showNav = !this.showNav;
+  }
+
+  onLogout() {
+    this.router.navigate(['/superlogin']);
   }
 //Constructor
   constructor(private apiService: ApiService) {
@@ -98,12 +107,12 @@ export class superadminComponent {
 
       this.apiService.delete(endpoint).subscribe({
         next: () => {
-          alert('Admin deleted successfully');
+          this.triggerPopup(true,'Admin deleted successfully');
           this.fetchAdminData(); // Refresh data
         },
         error: (err) => {
           console.error('Error deleting Admin:', err);
-          alert(err.error?.message || 'Error deleting Admin');
+         this.triggerPopup(false,'Error deleting Admin');
         },
       });
     }
@@ -185,17 +194,17 @@ export class superadminComponent {
     this.apiService.post(endpoint, this.adminForm.value).subscribe({
           next: (response) => {
             console.log('Admin created successfully:', response);
-            alert('Admin has been created successfully!');
+            this.triggerPopup(true,'Admin has been created successfully!');
             this.fetchAdminData();
             this.adminForm.reset();
           },
           error: (err) => {
             console.error('Error during admin creation:', err);
-            alert('There was an error while creating the admin. Please try again.');
+            this.triggerPopup(false,'There was an error while creating the admin. Please try again.');
           }
         });
     } else {
-      alert('Please fill out the form correctly.');
+      this.triggerPopup(false,'Please fill out the form correctly.');
     }
   }
 
@@ -214,17 +223,17 @@ export class superadminComponent {
       this.apiService.post(endpoint, this.userForm.value).subscribe({
           next: (response) => {
             console.log('Registration successful:', response);
-            alert('You have been registered successfully!');
+            this.triggerPopup(true,'You have been registered successfully!');
             this.fetchUsersData();
             this.userForm.reset(); // Reset the form after submission
           },
           error: (err) => {
             console.error('Error during registration:', err);
-            alert('There was an error during registration. Please try again.');
+            this.triggerPopup(false,'There was an error during registration. Please try again.');
           }
         });
     } else {
-      alert('Please fill all fields correctly.');
+      this.triggerPopup(false,'Please fill all fields correctly.');
     }
   }
 
@@ -243,12 +252,12 @@ export class superadminComponent {
   
   this.apiService.put(endpoint, updatedUser).subscribe({
       next: () => {
-        alert('User updated successfully');
+        this.triggerPopup(true,'User updated successfully');
         this.editIndex = null; // Exit edit mode
         this.fetchUsersData(); // Refresh data
       },
       error: () => {
-        alert('Error updating user');
+        this.triggerPopup(false,'Error updating user');
       },
     });
   }
@@ -265,12 +274,13 @@ export class superadminComponent {
     
     this.apiService.delete(endpoint).subscribe({
         next: () => {
-          alert('User deleted successfully');
+          this.triggerPopup(true,'User deleted successfully');
           this.fetchUsersData(); // Refresh data
         },
         error: (err) => {
+          this.triggerPopup(false,'Error deleting user');
           console.error('Error deleting user:', err);
-          alert(err.error?.message || 'Error deleting user');
+          
         },
       });
     }
@@ -291,12 +301,12 @@ saveEditU(index: number): void {
 
   this.apiService.put(endpoint, updatedAdmin).subscribe({
     next: () => {
-      alert('Admin updated successfully');
+      this.triggerPopup(true,'Admin updated successfully');
       this.editIndexU = null; // Exit edit mode
       this.fetchAdminData(); // Refresh admin data
     },
     error: () => {
-      alert('Error updating admin');
+      this.triggerPopup(false,'Error updating admin');
     },
   });
 }
@@ -307,5 +317,23 @@ cancelEditU(): void {
   this.fetchAdminData(); // Re-fetch data to discard unsaved changes
 }
 
+logout(){
+  this.superadminService.setSuperAdminStatus(false);
+  this.router.navigate(['/superlogin']);
+}
+
+
+triggerPopup(isSuccess: boolean, message: string): void {
+  this.isSuccess = isSuccess;
+  this.popupMessage = message;
+  this.showPopup = true;
+
+  // Auto-hide popup after 3 seconds
+  setTimeout(() => {
+    this.showPopup = false;
+    if(isSuccess){
+    }
+  }, 2000);
+}
 
 }

@@ -15,7 +15,6 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  @Input() isSidebarActive: boolean = false;
   newtickets = 0;
   resolvedtickets = 0;
   ptickets = 0;
@@ -29,7 +28,7 @@ export class AdminDashboardComponent implements OnInit {
   formattedDates: string[] = [];
   ticket: any[] = [];
 
-  constructor(private adminService: AdminService, private http: HttpClient, private apiService: ApiService) {}
+  constructor(private adminService: AdminService, private apiService: ApiService) {}
 
 
   ngOnInit(): void {
