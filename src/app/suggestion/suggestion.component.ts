@@ -45,7 +45,7 @@ export class SuggestionComponent implements OnInit {
     };
     const endpoint = `api/Suggestion`;
     // Send data to the backend API
-    this.apiService.post('Suggestion', payload).subscribe({
+    this.apiService.post(endpoint, payload).subscribe({
       next: (response) => {
         console.log('Suggestion submitted successfully:', response);
         this.triggerPopup(true, 'Suggestion submitted successfully');

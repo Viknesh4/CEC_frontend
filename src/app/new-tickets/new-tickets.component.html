@@ -56,7 +56,7 @@
           <div *ngIf="showMore" class="additional-details">
             <p><strong>Customer name:</strong> {{ getUserNameById(selectedTicket.customer_id) }}</p>
             <p><strong>Order Id:</strong> {{ selectedTicket.order_id }}</p>
-            <p><strong>Order Details:</strong> {{ getdescription(selectedTicket.order_id).orderItems }}</p>
+            <p><strong>Order Details:</strong> {{ getdescription(selectedTicket.order_id).orderItems}}</p>
             <p><strong>Order Date:</strong> {{ getdescription(selectedTicket.order_id).orderDate | date: 'yyyy-MM-dd' }}</p>
         
             <!-- View Photo Section -->

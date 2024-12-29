@@ -16,6 +16,11 @@
   z-index: 1; /* Ensures the profile card stays above the blur */
 }
 
+.list-group-item{
+  display: flex;
+  position: inherit;
+}
+
 /* Gradient Header */
 .bg-gradient {
   padding: 20px;
