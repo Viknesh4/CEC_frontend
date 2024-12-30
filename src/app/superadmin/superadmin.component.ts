@@ -2,14 +2,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { SuperadminService } from '../superadmin.service';
 
 @Component({
   selector: 'app-superadmin',
   standalone: true,
-  imports: [HttpClientModule, CommonModule,FormsModule,ReactiveFormsModule,RouterLink],
+  imports: [HttpClientModule, CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
 })
